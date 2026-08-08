@@ -1,20 +1,21 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { getLangFromUrl, routes } from '../i18n/ui';
+import { getLangFromUrl, routes, type RouteKey } from '../i18n/ui';
 
 interface Props {
 	title: string;
 	description: string;
 	lastUpdated: string;
+	currentPage: RouteKey;
 }
 
-const { title, description, lastUpdated } = Astro.props;
+const { title, description, lastUpdated, currentPage } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const backHref = routes[lang].home;
 const backLabel = lang === 'it' ? '← Torna alla home' : '← Back to home';
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} currentPage={currentPage}>
 	<article class="legal">
 		<div class="container">
 			<a href={backHref} class="back-link">{backLabel}</a>

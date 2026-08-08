@@ -40,6 +40,36 @@ const navItems = [
 		</p>
 		<p class="vat-line">{copy.vat}</p>
 
+		<div class="footer-widgets">
+			<a href="https://www.lovelyitalia.it/" target="_blank" rel="nofollow noopener">
+				<img
+					src="https://www.lovelyitalia.com/grafica/banner/siamosu234x60white.png"
+					width="234"
+					height="60"
+					loading="lazy"
+					alt="Lastminute e offerte di Hotel, Bed and Breakfast, Agriturismi in tutta Italia"
+				/>
+			</a>
+			<a href="https://www.bed-and-breakfast.it" target="_blank" rel="nofollow noopener">
+				<img
+					src="https://www.bed-and-breakfast.it/img/widget/siamo_su_200x59.png"
+					width="200"
+					height="59"
+					loading="lazy"
+					alt="Siamo su Bed-and-Breakfast.it"
+				/>
+			</a>
+			<a href="https://www.ultimissimominuto.com/" target="_blank" rel="nofollow noopener">
+				<img
+					src="https://www.ultimissimominuto.com/grafica/banner/ul180x30.gif"
+					width="180"
+					height="30"
+					loading="lazy"
+					alt="UltimissimoMinuto"
+				/>
+			</a>
+		</div>
+
 		<div class="legal-row">
 			<p class="copyright">© {year} Tenuta Montincello</p>
 			<div class="links">
@@ -72,6 +102,30 @@ const navItems = [
 	.vat-line {
 		color: var(--color-fg-light);
 		margin-bottom: 0.4em;
+	}
+
+	.footer-widgets {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1.4em;
+		margin-top: 1.2em;
+	}
+
+	.footer-widgets a {
+		display: inline-block;
+		opacity: 0.85;
+		transition: opacity 0.2s ease;
+	}
+
+	.footer-widgets a:hover {
+		opacity: 1;
+	}
+
+	.footer-widgets img {
+		display: block;
+		height: auto;
+		max-width: 100%;
 	}
 
 	.legal-row {

@@ -52,8 +52,9 @@ const ogImage = await getImage({
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(ogImage.src, Astro.site);
 
-const alternateIt = new URL(routes.it.home, Astro.site).toString();
-const alternateEn = new URL(routes.en.home, Astro.site).toString();
+const withTrailingSlash = (path: string) => (path.endsWith('/') ? path : `${path}/`);
+const alternateIt = new URL(withTrailingSlash(routes.it[currentPage]), Astro.site).toString();
+const alternateEn = new URL(withTrailingSlash(routes.en[currentPage]), Astro.site).toString();
 
 const lodgingSchema = {
 	'@context': 'https://schema.org',
