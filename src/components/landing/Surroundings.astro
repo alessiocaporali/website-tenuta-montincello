@@ -5,6 +5,7 @@ interface Place {
 	label: string;
 	image: ImageMetadata;
 	imageAlt: string;
+	description: string;
 }
 
 interface Props {
@@ -23,10 +24,13 @@ const { eyebrow, title, places } = Astro.props;
 		<div class="places-grid">
 			{
 				places.map((place) => (
-					<div class="place-card">
-						<Image src={place.image} alt={place.imageAlt} width={500} height={375} />
-						<p>{place.label}</p>
-					</div>
+					<details class="place-card">
+						<summary>
+							<Image src={place.image} alt={place.imageAlt} width={500} height={375} />
+							<p>{place.label}</p>
+						</summary>
+						<p class="place-description text-justify">{place.description}</p>
+					</details>
 				))
 			}
 		</div>
@@ -42,9 +46,19 @@ const { eyebrow, title, places } = Astro.props;
 	}
 
 	.place-card {
+		text-align: left;
+	}
+
+	.place-card summary {
 		position: relative;
+		cursor: pointer;
+		list-style: none;
 		border-radius: var(--border-radius);
 		overflow: hidden;
+	}
+
+	.place-card summary::-webkit-details-marker {
+		display: none;
 	}
 
 	.place-card img {
@@ -54,7 +68,7 @@ const { eyebrow, title, places } = Astro.props;
 		display: block;
 	}
 
-	.place-card p {
+	.place-card summary p {
 		position: absolute;
 		inset: auto 0 0 0;
 		margin: 0;
@@ -63,5 +77,10 @@ const { eyebrow, title, places } = Astro.props;
 		color: #fff;
 		text-align: center;
 		background: linear-gradient(180deg, rgba(47, 42, 31, 0) 0%, rgba(47, 42, 31, 0.75) 100%);
+	}
+
+	.place-description {
+		margin: 0.8em 0 0;
+		color: var(--color-fg);
 	}
 </style>
