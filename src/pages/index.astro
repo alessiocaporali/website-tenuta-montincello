@@ -5,6 +5,7 @@ import Welcome from '../components/landing/Welcome.astro';
 import Surroundings from '../components/landing/Surroundings.astro';
 import WhyUs from '../components/landing/WhyUs.astro';
 import HolidayHomesOverview from '../components/landing/HolidayHomesOverview.astro';
+import PriceSection from '../components/landing/PriceSection.astro';
 import ServicesOffered from '../components/landing/ServicesOffered.astro';
 import ContactInfo from '../components/landing/ContactInfo.astro';
 import welcome1 from '../assets/images/welcome-1.jpg';
@@ -25,6 +26,114 @@ import iconCaseVacanza from '../assets/images/cards/icon-case-vacanza.png';
 import iconMare from '../assets/images/cards/icon-mare.png';
 import iconGiochi from '../assets/images/cards/icon-giochi.png';
 import iconBbq from '../assets/images/cards/icon-bbq.png';
+import planBilocale24 from '../assets/images/plan-bilocale-2-4.jpg';
+import planBilocale5 from '../assets/images/plan-bilocale-5.jpg';
+import planTrilocale4 from '../assets/images/plan-trilocale-4.jpg';
+import planTrilocale5 from '../assets/images/plan-trilocale-5.jpg';
+import bilocale24_1 from '../assets/images/apartment-bilocale-2-4.jpg';
+import bilocale24_2 from '../assets/images/apartment-bilocale-2-4-2.jpg';
+import bilocale24_3 from '../assets/images/apartment-bilocale-2-4-3.jpg';
+import bilocale24_4 from '../assets/images/apartment-bilocale-2-4-4.jpg';
+import bilocale24_5 from '../assets/images/apartment-bilocale-2-4-5.jpg';
+import bilocale24_6 from '../assets/images/apartment-bilocale-2-4-6.jpg';
+import bilocale24_7 from '../assets/images/apartment-bilocale-2-4-7.jpg';
+import bilocale24_8 from '../assets/images/apartment-bilocale-2-4-8.jpg';
+import bilocale5_1 from '../assets/images/apartment-bilocale-5.jpg';
+import bilocale5_2 from '../assets/images/apartment-bilocale-5-2.jpg';
+import bilocale5_3 from '../assets/images/apartment-bilocale-5-3.jpg';
+import bilocale5_4 from '../assets/images/apartment-bilocale-5-4.jpg';
+import bilocale5_5 from '../assets/images/apartment-bilocale-5-5.jpg';
+import bilocale5_6 from '../assets/images/apartment-bilocale-5-6.jpg';
+import bilocale5_7 from '../assets/images/apartment-bilocale-5-7.jpg';
+import bilocale5_8 from '../assets/images/apartment-bilocale-5-8.jpg';
+import trilocale4_1 from '../assets/images/apartment-trilocale-4.jpg';
+import trilocale4_2 from '../assets/images/apartment-trilocale-4-2.jpg';
+import trilocale4_3 from '../assets/images/apartment-trilocale-4-3.jpg';
+import trilocale4_4 from '../assets/images/apartment-trilocale-4-4.jpg';
+import trilocale4_5 from '../assets/images/apartment-trilocale-4-5.jpg';
+import trilocale4_6 from '../assets/images/apartment-trilocale-4-6.jpg';
+import trilocale4_7 from '../assets/images/apartment-trilocale-4-7.jpg';
+import trilocale4_8 from '../assets/images/apartment-trilocale-4-8.jpg';
+import trilocale5_1 from '../assets/images/apartment-trilocale-5.jpg';
+import trilocale5_2 from '../assets/images/apartment-trilocale-5-2.jpg';
+import trilocale5_3 from '../assets/images/apartment-trilocale-5-3.jpg';
+import trilocale5_4 from '../assets/images/apartment-trilocale-5-4.jpg';
+import trilocale5_5 from '../assets/images/apartment-trilocale-5-5.jpg';
+import trilocale5_6 from '../assets/images/apartment-trilocale-5-6.jpg';
+import trilocale5_7 from '../assets/images/apartment-trilocale-5-7.jpg';
+import trilocale5_8 from '../assets/images/apartment-trilocale-5-8.jpg';
+
+function buildGallery(title: string, images: ImageMetadata[], plan: ImageMetadata) {
+	return [
+		...images.map((src, i) => ({ src, alt: i === 0 ? title : `${title}, foto ${i + 1}` })),
+		{ src: plan, alt: `Planimetria, ${title}` },
+	];
+}
+
+const apartments = [
+	{
+		title: 'Bilocale 2-4 persone',
+		rooms: ['Veranda', 'Soggiorno con angolo cottura e divano letto (due letti singoli)', 'Camera matrimoniale', 'Bagno'],
+		photoNote: '9 foto',
+		planIcon: planBilocale24,
+		planIconAlt: 'Planimetria Bilocale 2-4 persone',
+		gallery: buildGallery(
+			'Bilocale 2-4 persone',
+			[bilocale24_1, bilocale24_2, bilocale24_3, bilocale24_4, bilocale24_5, bilocale24_6, bilocale24_7, bilocale24_8],
+			planBilocale24,
+		),
+	},
+	{
+		title: 'Bilocale 5 persone',
+		rooms: ['Veranda', 'Soggiorno con angolo cottura e divano letto (due letti singoli)', 'Camera con letto matrimoniale e singolo', 'Bagno'],
+		photoNote: '9 foto',
+		planIcon: planBilocale5,
+		planIconAlt: 'Planimetria Bilocale 5 persone',
+		gallery: buildGallery(
+			'Bilocale 5 persone',
+			[bilocale5_1, bilocale5_2, bilocale5_3, bilocale5_4, bilocale5_5, bilocale5_6, bilocale5_7, bilocale5_8],
+			planBilocale5,
+		),
+	},
+	{
+		title: 'Trilocale 4 persone',
+		rooms: ['Veranda', 'Soggiorno con angolo cottura', 'Camera matrimoniale', 'Camera con due letti singoli', 'Bagno'],
+		photoNote: '9 foto',
+		planIcon: planTrilocale4,
+		planIconAlt: 'Planimetria Trilocale 4 persone',
+		gallery: buildGallery(
+			'Trilocale 4 persone',
+			[trilocale4_1, trilocale4_2, trilocale4_3, trilocale4_4, trilocale4_5, trilocale4_6, trilocale4_7, trilocale4_8],
+			planTrilocale4,
+		),
+	},
+	{
+		title: 'Trilocale 5 persone',
+		rooms: ['Veranda', 'Soggiorno con angolo cottura', 'Camera matrimoniale', 'Camera con letto singolo e divano letto (due letti singoli)', 'Bagno'],
+		photoNote: '9 foto',
+		planIcon: planTrilocale5,
+		planIconAlt: 'Planimetria Trilocale 5 persone',
+		gallery: buildGallery(
+			'Trilocale 5 persone',
+			[trilocale5_1, trilocale5_2, trilocale5_3, trilocale5_4, trilocale5_5, trilocale5_6, trilocale5_7, trilocale5_8],
+			planTrilocale5,
+		),
+	},
+];
+
+const priceRows = [
+	{ period: 'fino al 12/06', prices: [250, 300, 350, 400, 400, 450] },
+	{ period: '13/06 – 26/06', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '27/06 – 10/07', prices: [350, 400, 450, 500, 500, 550] },
+	{ period: '11/07 – 24/07', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '25/07 – 31/07', prices: [500, 550, 600, 650, 650, 700] },
+	{ period: '01/08 – 07/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '08/08 – 21/08', prices: [800, 850, 900, 950, 950, 1000] },
+	{ period: '22/08 – 28/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '29/08 – 04/09', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '05/09 – 11/09', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '12/09 - 26/09', prices: [250, 300, 350, 400, 400, 450] },
+];
 ---
 
 <BaseLayout
@@ -36,7 +145,7 @@ import iconBbq from '../assets/images/cards/icon-bbq.png';
 		eyebrow="Case vacanze nel verde di un uliveto"
 		title="La tua vacanza a Vieste, nel cuore del Gargano!"
 		subtitle="Villette immerse in un uliveto di 4.000 mq, a due passi dal mare e dal Parco Nazionale del Gargano."
-		ctaPrimary={{ href: '/case-vacanza', label: 'Scopri le Case Vacanza' }}
+		ctaPrimary={{ href: '#case-vacanza', label: 'Scopri le Case Vacanza' }}
 		ctaSecondary={{ href: '#contact', label: 'Richiedi Informazioni' }}
 		imageAlt="Uliveto della Tenuta Montincello a Vieste"
 	/>
@@ -71,7 +180,7 @@ import iconBbq from '../assets/images/cards/icon-bbq.png';
 		title="Perché scegliere noi"
 		items={[
 			{ image: iconUliveto, alt: 'Icona uliveto', label: 'Uliveto di 4.000 mq' },
-			{ image: iconCaseVacanza, alt: 'Icona case vacanza', label: '5 case vacanza di nuova costruzione' },
+			{ image: iconCaseVacanza, alt: 'Icona case vacanza', label: '5 case vacanza' },
 			{ image: iconMare, alt: 'Icona mare', label: 'Mare a 900 metri, Baia di Scialmarino' },
 			{ image: iconGiochi, alt: 'Icona parco giochi', label: 'Parco giochi per bambini' },
 			{ image: iconBbq, alt: 'Icona barbecue', label: 'Area barbecue' },
@@ -81,14 +190,39 @@ import iconBbq from '../assets/images/cards/icon-bbq.png';
 	<HolidayHomesOverview
 		eyebrow="Le Case Vacanza"
 		title="Case vacanza immerse nel verde"
-		text="La Tenuta Montincello, gestita direttamente dai proprietari, oltre a produrre Olio Extravergine di Oliva, offre moderne case vacanza di nuova costruzione. Le villette, completamente arredate, climatizzate e dotate di ogni comfort, sono immerse nel verde di un uliveto di 4.000 mq, ideale per chi desidera relax e contatto con la natura. Sono disponibili soluzioni con una o due camere da letto, adatte a diverse esigenze di soggiorno."
-		cta={{ href: '/case-vacanza', label: 'Scopri le tipologie di casa vacanza' }}
+		text={[
+			'La Tenuta Montincello, gestita direttamente dai proprietari, oltre a produrre Olio Extravergine di Oliva, offre moderne case vacanza di nuova costruzione. Le villette, completamente arredate, climatizzate e dotate di ogni comfort, sono immerse nel verde di un uliveto di 4.000 mq, ideale per chi desidera relax e contatto con la natura. Sono disponibili soluzioni con una o due camere da letto, adatte a diverse esigenze di soggiorno.',
+			"Villette bilocali e trilocali per soddisfare le richieste di ogni cliente. Tutte le unità includono aria condizionata (supplemento), frigo/freezer, TV satellitare, cassaforte e ventilatori a soffitto/piantana.",
+		]}
 		images={[
 			{ src: caseVacanza1, alt: 'Casa vacanza immersa nell’uliveto' },
 			{ src: caseVacanza2, alt: 'Ingresso di una casa vacanza' },
 			{ src: caseVacanza3, alt: 'Esterno di una casa vacanza' },
 			{ src: caseVacanza4, alt: 'Villetta tra gli ulivi della Tenuta' },
 		]}
+		apartments={apartments}
+		prevLabel="Foto precedente"
+		nextLabel="Foto successiva"
+	/>
+
+	<PriceSection
+		eyebrow="Tariffe"
+		title="Listino Prezzi"
+		intro="Prezzi settimanali in euro. Includono i consumi (acqua, luce, gas), posto auto e uso dell'angolo cottura."
+		periodLabel="Periodo"
+		columns={['Bilo 2p', 'Bilo 3p', 'Bilo 4p', 'Bilo 5p', 'Trilo 4p', 'Trilo 5p']}
+		rows={priceRows}
+		supplementsTitle="Supplementi"
+		supplements={[
+			{ label: 'Supplemento aria condizionata', value: '10 € / giorno' },
+			{ label: 'Supplemento animale', value: '100 € / settimana' },
+			{ label: 'Biancheria da letto (a persona)', value: '7,50 €' },
+			{ label: 'Biancheria da bagno (a persona)', value: '7,50 €' },
+			{ label: 'Pulizia finale', value: '50 €' },
+			{ label: 'Deposito cauzionale', value: '200 €' },
+		]}
+		taxTitle="Imposta di soggiorno"
+		taxText="È dovuta l'imposta di soggiorno comunale: <strong>1,00 € a persona al giorno</strong> nel periodo ottobre–maggio, <strong>2,50 € a persona al giorno</strong> nel periodo giugno–settembre, per ospiti dai 14 anni in su. L'imposta si applica per un massimo di 10 giorni a persona e va corrisposta in loco."
 	/>
 
 	<ServicesOffered

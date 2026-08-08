@@ -1,0 +1,118 @@
+---
+import PriceTable from '../content/PriceTable.astro';
+
+interface Row {
+	period: string;
+	prices: number[];
+}
+
+interface Supplement {
+	label: string;
+	value: string;
+}
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	intro: string;
+	periodLabel: string;
+	columns: string[];
+	rows: Row[];
+	supplementsTitle: string;
+	supplements: Supplement[];
+	taxTitle: string;
+	taxText: string;
+}
+
+const {
+	eyebrow,
+	title,
+	intro,
+	periodLabel,
+	columns,
+	rows,
+	supplementsTitle,
+	supplements,
+	taxTitle,
+	taxText,
+} = Astro.props;
+---
+
+<section id="listino-prezzi" class="tint-sea">
+	<div class="container text-center price-header">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+		<p class="intro-text">{intro}</p>
+	</div>
+
+	<div class="container">
+		<PriceTable periodLabel={periodLabel} columns={columns} rows={rows} />
+
+		<div class="extras-grid">
+			<div>
+				<h3>{supplementsTitle}</h3>
+				<div class="supplements-list">
+					{
+						supplements.map((s) => (
+							<div class="supplement-row">
+								<span>{s.label}</span>
+								<strong>{s.value}</strong>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<div>
+				<h3>{taxTitle}</h3>
+				<p class="text-justify" set:html={taxText} />
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.price-header {
+		margin-bottom: 1em;
+	}
+
+	.intro-text {
+		max-width: 36em;
+		margin: 1em auto 0;
+		color: var(--color-fg);
+	}
+
+	h3 {
+		margin-top: 2em;
+	}
+
+	.extras-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3em;
+		align-items: start;
+	}
+
+	.supplements-list {
+		margin: 1.5em 0 0;
+	}
+
+	.supplement-row {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.6em 0;
+		border-bottom: 1px solid var(--color-border-bg);
+	}
+
+	.extras-grid p {
+		margin-top: 1.5em;
+		color: var(--color-fg);
+	}
+
+	@media (max-width: 700px) {
+		.extras-grid {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+	}
+</style>

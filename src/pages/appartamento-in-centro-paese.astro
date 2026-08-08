@@ -2,7 +2,43 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PriceTable from '../components/content/PriceTable.astro';
-import centroImage from '../assets/images/apartment-centro-placeholder.jpg';
+import PhotoViewer from '../components/content/PhotoViewer.astro';
+import ContactInfo from '../components/landing/ContactInfo.astro';
+import inPaese1 from '../assets/images/in_paese/1_orig.jpeg';
+import inPaese2 from '../assets/images/in_paese/2_orig.jpeg';
+import inPaese3 from '../assets/images/in_paese/3_orig.jpeg';
+import inPaese4 from '../assets/images/in_paese/4_orig.jpeg';
+import inPaese5 from '../assets/images/in_paese/5_orig.jpeg';
+import inPaese6 from '../assets/images/in_paese/6_orig.jpeg';
+import inPaese7 from '../assets/images/in_paese/7_orig.jpeg';
+import inPaese8 from '../assets/images/in_paese/8_orig.jpeg';
+import inPaese9 from '../assets/images/in_paese/9_orig.jpeg';
+import inPaese10 from '../assets/images/in_paese/10_orig.jpeg';
+import inPaese11 from '../assets/images/in_paese/11_orig.jpeg';
+import inPaese12 from '../assets/images/in_paese/12_orig.jpeg';
+import inPaese13 from '../assets/images/in_paese/13_orig.jpeg';
+import inPaese14 from '../assets/images/in_paese/14_orig.jpeg';
+import inPaese15 from '../assets/images/in_paese/15_orig.jpeg';
+import inPaese16 from '../assets/images/in_paese/16_orig.jpeg';
+
+const galleryImages = [
+	{ src: inPaese1, alt: 'La palazzina in Via Giacomo Leopardi a Vieste' },
+	{ src: inPaese2, alt: 'Vista sul mare e sulla spiaggia di Vieste al tramonto' },
+	{ src: inPaese3, alt: 'Vista sui tetti del centro di Vieste e sul mare' },
+	{ src: inPaese4, alt: 'Vista panoramica su Vieste e il mare' },
+	{ src: inPaese5, alt: "Il bagno dell'appartamento" },
+	{ src: inPaese6, alt: 'Il bagno con doccia e lavabo' },
+	{ src: inPaese7, alt: 'Il bagno con lavabo e specchio' },
+	{ src: inPaese8, alt: "L'ingresso con armadio" },
+	{ src: inPaese9, alt: "Il corridoio dell'appartamento" },
+	{ src: inPaese10, alt: 'La cucina attrezzata' },
+	{ src: inPaese11, alt: 'La cucina con angolo pranzo e balcone' },
+	{ src: inPaese12, alt: 'La cucina con tavolo da pranzo' },
+	{ src: inPaese13, alt: 'La camera con letti singoli' },
+	{ src: inPaese14, alt: 'La camera matrimoniale' },
+	{ src: inPaese15, alt: 'La camera matrimoniale con quadro' },
+	{ src: inPaese16, alt: 'La camera matrimoniale con balcone' },
+];
 
 const rows = [
 	{ period: 'fino al 12/06', prices: [400, 450, 500] },
@@ -34,13 +70,21 @@ const rows = [
 	<section class="apartment-section">
 		<div class="container apartment-grid">
 			<div class="apartment-image">
-				<Image src={centroImage} alt="Appartamento in Centro Paese a Vieste" width={1000} height={750} />
+				<Image src={inPaese1} alt="La palazzina in Via Giacomo Leopardi a Vieste, sede dell'Appartamento in Centro Paese" width={700} height={700} />
 			</div>
 			<div class="apartment-text">
 				<p class="text-justify">
 					Un comodo appartamento in Via Giacomo Leopardi 10, nel cuore di Vieste, a soli 500 metri
-					sia dal lungomare Enrico Mattei sia dal lungomare Europa.
+					sia dal lungomare Enrico Mattei sia dal lungomare Europa: la soluzione ideale per chi
+					preferisce muoversi a piedi tra il centro storico, i negozi e le spiagge cittadine.
 				</p>
+
+				<ul class="quick-facts">
+					<li><strong>2–4</strong> ospiti</li>
+					<li><strong>500 m</strong> dal mare</li>
+					<li><strong>2</strong> balconi</li>
+				</ul>
+
 				<h3>L'appartamento comprende</h3>
 				<ul>
 					<li>Ingresso</li>
@@ -50,6 +94,14 @@ const rows = [
 					<li>Bagno</li>
 				</ul>
 				<p>Include aria condizionata, lavatrice e biancheria.</p>
+
+				<p class="tax-note">
+					È dovuta l'imposta di soggiorno comunale: <strong>1,00 € a persona al giorno</strong> nel
+					periodo ottobre–maggio, <strong>2,50 € a persona al giorno</strong> nel periodo
+					giugno–settembre, per ospiti dai 14 anni in su, fino a un massimo di 10 giorni a persona,
+					da corrispondere in loco.
+				</p>
+
 				<p class="registration">
 					Codice Licenza SLFG000580-0070 · CIN IT071060B400124386
 				</p>
@@ -57,7 +109,17 @@ const rows = [
 		</div>
 	</section>
 
-	<section class="price-section alt">
+	<section class="gallery-section">
+		<div class="container">
+			<header class="text-center">
+				<span class="eyebrow">Scopri l'appartamento</span>
+				<h2>Galleria Fotografica</h2>
+			</header>
+			<PhotoViewer images={galleryImages} prevLabel="Foto precedente" nextLabel="Foto successiva" />
+		</div>
+	</section>
+
+	<section class="price-section" class="tint-sea">
 		<div class="container">
 			<header class="text-center">
 				<span class="eyebrow">Tariffe</span>
@@ -66,6 +128,17 @@ const rows = [
 			<PriceTable periodLabel="Periodo" columns={['2p', '3p', '4p']} rows={rows} />
 		</div>
 	</section>
+
+	<ContactInfo
+		eyebrow="Dove siamo"
+		title="Contatti"
+		addressLabel="Indirizzo"
+		addressText="Via Giacomo Leopardi 10, Vieste (FG)"
+		mapEmbedTitle="Mappa dell'Appartamento in Centro Paese"
+		lat={41.8816918}
+		lng={16.1713}
+		mapUrl="https://www.google.com/maps/place/T.M.+in+Paese/@41.8816958,16.1687251,17z/data=!4m6!3m5!1s0x1337c941088f153b:0x7407b2ba7eafc205!8m2!3d41.8816918!4d16.1713!16s%2Fg%2F11z7g_pzl7!5m1!1e2?entry=ttu"
+	/>
 </BaseLayout>
 
 <style>
@@ -85,13 +158,47 @@ const rows = [
 		align-items: center;
 	}
 
+	.apartment-image {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.2em;
+	}
+
 	.apartment-image img {
 		border-radius: var(--border-radius);
 		width: 100%;
+		aspect-ratio: 1 / 1;
 	}
 
 	.apartment-text ul {
 		padding-left: 1.2em;
+	}
+
+	.quick-facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6em;
+		padding-left: 0;
+		list-style: none;
+		margin: 1.2em 0;
+	}
+
+	.quick-facts li {
+		padding: 0.5em 1em;
+		background: var(--color-panel);
+		border-radius: var(--border-radius);
+		font-size: 0.9em;
+		color: var(--color-fg-light);
+	}
+
+	.quick-facts strong {
+		color: var(--color-fg);
+	}
+
+	.tax-note {
+		font-size: 0.9em;
+		color: var(--color-fg-light);
+		margin-top: 1.2em;
 	}
 
 	.registration {

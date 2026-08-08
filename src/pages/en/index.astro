@@ -5,6 +5,7 @@ import Welcome from '../../components/landing/Welcome.astro';
 import Surroundings from '../../components/landing/Surroundings.astro';
 import WhyUs from '../../components/landing/WhyUs.astro';
 import HolidayHomesOverview from '../../components/landing/HolidayHomesOverview.astro';
+import PriceSection from '../../components/landing/PriceSection.astro';
 import ServicesOffered from '../../components/landing/ServicesOffered.astro';
 import ContactInfo from '../../components/landing/ContactInfo.astro';
 import welcome1 from '../../assets/images/welcome-1.jpg';
@@ -25,6 +26,114 @@ import iconCaseVacanza from '../../assets/images/cards/icon-case-vacanza.png';
 import iconMare from '../../assets/images/cards/icon-mare.png';
 import iconGiochi from '../../assets/images/cards/icon-giochi.png';
 import iconBbq from '../../assets/images/cards/icon-bbq.png';
+import planBilocale24 from '../../assets/images/plan-bilocale-2-4.jpg';
+import planBilocale5 from '../../assets/images/plan-bilocale-5.jpg';
+import planTrilocale4 from '../../assets/images/plan-trilocale-4.jpg';
+import planTrilocale5 from '../../assets/images/plan-trilocale-5.jpg';
+import bilocale24_1 from '../../assets/images/apartment-bilocale-2-4.jpg';
+import bilocale24_2 from '../../assets/images/apartment-bilocale-2-4-2.jpg';
+import bilocale24_3 from '../../assets/images/apartment-bilocale-2-4-3.jpg';
+import bilocale24_4 from '../../assets/images/apartment-bilocale-2-4-4.jpg';
+import bilocale24_5 from '../../assets/images/apartment-bilocale-2-4-5.jpg';
+import bilocale24_6 from '../../assets/images/apartment-bilocale-2-4-6.jpg';
+import bilocale24_7 from '../../assets/images/apartment-bilocale-2-4-7.jpg';
+import bilocale24_8 from '../../assets/images/apartment-bilocale-2-4-8.jpg';
+import bilocale5_1 from '../../assets/images/apartment-bilocale-5.jpg';
+import bilocale5_2 from '../../assets/images/apartment-bilocale-5-2.jpg';
+import bilocale5_3 from '../../assets/images/apartment-bilocale-5-3.jpg';
+import bilocale5_4 from '../../assets/images/apartment-bilocale-5-4.jpg';
+import bilocale5_5 from '../../assets/images/apartment-bilocale-5-5.jpg';
+import bilocale5_6 from '../../assets/images/apartment-bilocale-5-6.jpg';
+import bilocale5_7 from '../../assets/images/apartment-bilocale-5-7.jpg';
+import bilocale5_8 from '../../assets/images/apartment-bilocale-5-8.jpg';
+import trilocale4_1 from '../../assets/images/apartment-trilocale-4.jpg';
+import trilocale4_2 from '../../assets/images/apartment-trilocale-4-2.jpg';
+import trilocale4_3 from '../../assets/images/apartment-trilocale-4-3.jpg';
+import trilocale4_4 from '../../assets/images/apartment-trilocale-4-4.jpg';
+import trilocale4_5 from '../../assets/images/apartment-trilocale-4-5.jpg';
+import trilocale4_6 from '../../assets/images/apartment-trilocale-4-6.jpg';
+import trilocale4_7 from '../../assets/images/apartment-trilocale-4-7.jpg';
+import trilocale4_8 from '../../assets/images/apartment-trilocale-4-8.jpg';
+import trilocale5_1 from '../../assets/images/apartment-trilocale-5.jpg';
+import trilocale5_2 from '../../assets/images/apartment-trilocale-5-2.jpg';
+import trilocale5_3 from '../../assets/images/apartment-trilocale-5-3.jpg';
+import trilocale5_4 from '../../assets/images/apartment-trilocale-5-4.jpg';
+import trilocale5_5 from '../../assets/images/apartment-trilocale-5-5.jpg';
+import trilocale5_6 from '../../assets/images/apartment-trilocale-5-6.jpg';
+import trilocale5_7 from '../../assets/images/apartment-trilocale-5-7.jpg';
+import trilocale5_8 from '../../assets/images/apartment-trilocale-5-8.jpg';
+
+function buildGallery(title: string, images: ImageMetadata[], plan: ImageMetadata) {
+	return [
+		...images.map((src, i) => ({ src, alt: i === 0 ? title : `${title}, photo ${i + 1}` })),
+		{ src: plan, alt: `Floor plan, ${title}` },
+	];
+}
+
+const apartments = [
+	{
+		title: 'Two-Room Apartment, 2-4 guests',
+		rooms: ['Veranda', 'Living room with kitchenette and sofa bed (two single beds)', 'Master bedroom', 'Bathroom'],
+		photoNote: '9 photos',
+		planIcon: planBilocale24,
+		planIconAlt: 'Floor plan, Two-Room Apartment 2-4 guests',
+		gallery: buildGallery(
+			'Two-Room Apartment, 2-4 guests',
+			[bilocale24_1, bilocale24_2, bilocale24_3, bilocale24_4, bilocale24_5, bilocale24_6, bilocale24_7, bilocale24_8],
+			planBilocale24,
+		),
+	},
+	{
+		title: 'Two-Room Apartment, 5 guests',
+		rooms: ['Veranda', 'Living room with kitchenette and sofa bed (two single beds)', 'Bedroom with double and single bed', 'Bathroom'],
+		photoNote: '9 photos',
+		planIcon: planBilocale5,
+		planIconAlt: 'Floor plan, Two-Room Apartment 5 guests',
+		gallery: buildGallery(
+			'Two-Room Apartment, 5 guests',
+			[bilocale5_1, bilocale5_2, bilocale5_3, bilocale5_4, bilocale5_5, bilocale5_6, bilocale5_7, bilocale5_8],
+			planBilocale5,
+		),
+	},
+	{
+		title: 'Three-Room Apartment, 4 guests',
+		rooms: ['Veranda', 'Living room with kitchenette', 'Master bedroom', 'Twin bedroom', 'Bathroom'],
+		photoNote: '9 photos',
+		planIcon: planTrilocale4,
+		planIconAlt: 'Floor plan, Three-Room Apartment 4 guests',
+		gallery: buildGallery(
+			'Three-Room Apartment, 4 guests',
+			[trilocale4_1, trilocale4_2, trilocale4_3, trilocale4_4, trilocale4_5, trilocale4_6, trilocale4_7, trilocale4_8],
+			planTrilocale4,
+		),
+	},
+	{
+		title: 'Three-Room Apartment, 5 guests',
+		rooms: ['Veranda', 'Living room with kitchenette', 'Master bedroom', 'Bedroom with single bed and sofa bed (two single beds)', 'Bathroom'],
+		photoNote: '9 photos',
+		planIcon: planTrilocale5,
+		planIconAlt: 'Floor plan, Three-Room Apartment 5 guests',
+		gallery: buildGallery(
+			'Three-Room Apartment, 5 guests',
+			[trilocale5_1, trilocale5_2, trilocale5_3, trilocale5_4, trilocale5_5, trilocale5_6, trilocale5_7, trilocale5_8],
+			planTrilocale5,
+		),
+	},
+];
+
+const priceRows = [
+	{ period: 'until 12/06', prices: [250, 300, 350, 400, 400, 450] },
+	{ period: '13/06 – 26/06', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '27/06 – 10/07', prices: [350, 400, 450, 500, 500, 550] },
+	{ period: '11/07 – 24/07', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '25/07 – 31/07', prices: [500, 550, 600, 650, 650, 700] },
+	{ period: '01/08 – 07/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '08/08 – 21/08', prices: [800, 850, 900, 950, 950, 1000] },
+	{ period: '22/08 – 28/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '29/08 – 04/09', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '05/09 – 11/09', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '12/09 - 26/09', prices: [250, 300, 350, 400, 400, 450] },
+];
 ---
 
 <BaseLayout
@@ -36,7 +145,7 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 		eyebrow="Holiday homes in the green of an olive grove"
 		title="Your holiday in Vieste, in the heart of Gargano!"
 		subtitle="Villas set within a 4,000 sqm olive grove, just steps from the sea and the Gargano National Park."
-		ctaPrimary={{ href: '/en/apartments', label: 'Discover the Holiday Homes' }}
+		ctaPrimary={{ href: '#case-vacanza', label: 'Discover the Holiday Homes' }}
 		ctaSecondary={{ href: '#contact', label: 'Request Information' }}
 		imageAlt="Olive grove at Tenuta Montincello in Vieste"
 	/>
@@ -71,7 +180,7 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 		title="Why choose us"
 		items={[
 			{ image: iconUliveto, alt: 'Olive grove icon', label: '4,000 sqm olive grove' },
-			{ image: iconCaseVacanza, alt: 'Holiday homes icon', label: '5 newly built holiday homes' },
+			{ image: iconCaseVacanza, alt: 'Holiday homes icon', label: '5 holiday homes' },
 			{ image: iconMare, alt: 'Sea icon', label: 'Sea 900 m away, Scialmarino Bay' },
 			{ image: iconGiochi, alt: 'Playground icon', label: "Children's playground" },
 			{ image: iconBbq, alt: 'Barbecue icon', label: 'Barbecue area' },
@@ -81,14 +190,39 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 	<HolidayHomesOverview
 		eyebrow="The Holiday Homes"
 		title="Holiday homes surrounded by greenery"
-		text="Tenuta Montincello, directly managed by the owners, produces Extra Virgin Olive Oil and offers modern, newly built holiday homes. The fully furnished, air-conditioned villas, equipped with every comfort, are set within a 4,000 sqm olive grove, ideal for those seeking relaxation and contact with nature. One and two-bedroom options are available to suit different stay requirements."
-		cta={{ href: '/en/apartments', label: 'Discover the apartment types' }}
+		text={[
+			'Tenuta Montincello, directly managed by the owners, produces Extra Virgin Olive Oil and offers modern, newly built holiday homes. The fully furnished, air-conditioned villas, equipped with every comfort, are set within a 4,000 sqm olive grove, ideal for those seeking relaxation and contact with nature. One and two-bedroom options are available to suit different stay requirements.',
+			'Two and three-room villas to meet every guest’s needs. All units include air conditioning (surcharge), fridge/freezer, satellite TV, safe and ceiling/standing fans.',
+		]}
 		images={[
 			{ src: caseVacanza1, alt: 'Holiday home surrounded by the olive grove' },
 			{ src: caseVacanza2, alt: 'Entrance of a holiday home' },
 			{ src: caseVacanza3, alt: 'Exterior of a holiday home' },
 			{ src: caseVacanza4, alt: 'Villa among the olive trees of the estate' },
 		]}
+		apartments={apartments}
+		prevLabel="Previous photo"
+		nextLabel="Next photo"
+	/>
+
+	<PriceSection
+		eyebrow="Rates"
+		title="Price List"
+		intro="Weekly prices in euros. They include utilities (water, electricity, gas), a parking space and use of the kitchenette."
+		periodLabel="Period"
+		columns={['2-room 2p', '2-room 3p', '2-room 4p', '2-room 5p', '3-room 4p', '3-room 5p']}
+		rows={priceRows}
+		supplementsTitle="Extras"
+		supplements={[
+			{ label: 'Air conditioning', value: '€10 / day' },
+			{ label: 'Pet surcharge', value: '€100 / week' },
+			{ label: 'Bed linen (per person)', value: '€7.50' },
+			{ label: 'Bath linen (per person)', value: '€7.50' },
+			{ label: 'Final cleaning', value: '€50' },
+			{ label: 'Security deposit', value: '€200' },
+		]}
+		taxTitle="Tourist Tax"
+		taxText="A municipal tourist tax applies: <strong>€1.00 per person per day</strong> from October to May, <strong>€2.50 per person per day</strong> from June to September, for guests aged 14 and over. The tax applies for a maximum of 10 days per person and is payable on site."
 	/>
 
 	<ServicesOffered

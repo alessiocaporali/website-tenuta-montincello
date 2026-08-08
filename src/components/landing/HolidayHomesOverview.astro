@@ -1,28 +1,39 @@
 ---
 import { Image } from 'astro:assets';
+import ApartmentSelector from '../content/ApartmentSelector.astro';
 
 interface GalleryImage {
 	src: ImageMetadata;
 	alt: string;
 }
 
+interface ApartmentData {
+	title: string;
+	rooms: string[];
+	photoNote?: string;
+	planIcon: ImageMetadata;
+	planIconAlt: string;
+	gallery: GalleryImage[];
+}
+
 interface Props {
 	eyebrow: string;
 	title: string;
-	text: string;
-	cta: { href: string; label: string };
+	text: string[];
 	images: GalleryImage[];
+	apartments: ApartmentData[];
+	prevLabel?: string;
+	nextLabel?: string;
 }
 
-const { eyebrow, title, text, cta, images } = Astro.props;
+const { eyebrow, title, text, images, apartments, prevLabel, nextLabel } = Astro.props;
 ---
 
 <section id="case-vacanza">
 	<div class="container text-center overview">
 		<span class="eyebrow">{eyebrow}</span>
 		<h2>{title}</h2>
-		<p class="text-justify">{text}</p>
-		<a href={cta.href} class="btn btn-primary">{cta.label}</a>
+		<p class="text-justify">{text[0]}</p>
 	</div>
 
 	<div class="container">
@@ -36,27 +47,31 @@ const { eyebrow, title, text, cta, images } = Astro.props;
 			}
 		</div>
 	</div>
+
+	<div class="container text-center overview">
+		{text.slice(1).map((p) => <p class="text-justify">{p}</p>)}
+	</div>
+
+	<div class="container">
+		<ApartmentSelector apartments={apartments} prevLabel={prevLabel} nextLabel={nextLabel} />
+	</div>
 </section>
 
 <style>
 	.overview {
 		max-width: 46em;
-		margin: 0 auto;
+		margin: 0 auto 3em;
 	}
 
 	.overview p {
 		color: var(--color-fg);
 	}
 
-	.overview .btn {
-		margin-top: 0.6em;
-	}
-
 	.overview-photos {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 		gap: 1.2em;
-		margin-top: 3em;
+		margin-bottom: 3.5em;
 	}
 
 	.overview-photo img {

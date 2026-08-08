@@ -4,6 +4,7 @@
   --color-bg-transparent: rgba(250, 246, 238, 0.95);
   --color-panel: #f1e8d6;
   --color-panel-transparent: rgba(241, 232, 214, 0.96);
+  --color-panel-sea: #cecdb4;
 
   --color-fg-bold: #2f2a1f;
   --color-fg: rgba(47, 42, 31, 0.82);
@@ -93,6 +94,10 @@ section {
 
 section.alt {
   background: var(--color-panel);
+}
+
+section.tint-sea {
+  background: var(--color-panel-sea);
 }
 
 .text-center {

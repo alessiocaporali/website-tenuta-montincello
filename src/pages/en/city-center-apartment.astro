@@ -2,7 +2,43 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PriceTable from '../../components/content/PriceTable.astro';
-import centroImage from '../../assets/images/apartment-centro-placeholder.jpg';
+import PhotoViewer from '../../components/content/PhotoViewer.astro';
+import ContactInfo from '../../components/landing/ContactInfo.astro';
+import inPaese1 from '../../assets/images/in_paese/1_orig.jpeg';
+import inPaese2 from '../../assets/images/in_paese/2_orig.jpeg';
+import inPaese3 from '../../assets/images/in_paese/3_orig.jpeg';
+import inPaese4 from '../../assets/images/in_paese/4_orig.jpeg';
+import inPaese5 from '../../assets/images/in_paese/5_orig.jpeg';
+import inPaese6 from '../../assets/images/in_paese/6_orig.jpeg';
+import inPaese7 from '../../assets/images/in_paese/7_orig.jpeg';
+import inPaese8 from '../../assets/images/in_paese/8_orig.jpeg';
+import inPaese9 from '../../assets/images/in_paese/9_orig.jpeg';
+import inPaese10 from '../../assets/images/in_paese/10_orig.jpeg';
+import inPaese11 from '../../assets/images/in_paese/11_orig.jpeg';
+import inPaese12 from '../../assets/images/in_paese/12_orig.jpeg';
+import inPaese13 from '../../assets/images/in_paese/13_orig.jpeg';
+import inPaese14 from '../../assets/images/in_paese/14_orig.jpeg';
+import inPaese15 from '../../assets/images/in_paese/15_orig.jpeg';
+import inPaese16 from '../../assets/images/in_paese/16_orig.jpeg';
+
+const galleryImages = [
+	{ src: inPaese1, alt: 'The building on Via Giacomo Leopardi in Vieste' },
+	{ src: inPaese2, alt: 'Sea and beach view of Vieste at sunset' },
+	{ src: inPaese3, alt: 'View over the rooftops of central Vieste and the sea' },
+	{ src: inPaese4, alt: 'Panoramic view of Vieste and the sea' },
+	{ src: inPaese5, alt: 'The bathroom' },
+	{ src: inPaese6, alt: 'The bathroom with shower and sink' },
+	{ src: inPaese7, alt: 'The bathroom with sink and mirror' },
+	{ src: inPaese8, alt: 'The entrance with wardrobe' },
+	{ src: inPaese9, alt: 'The hallway' },
+	{ src: inPaese10, alt: 'The fully equipped kitchen' },
+	{ src: inPaese11, alt: 'The kitchen with dining area and balcony' },
+	{ src: inPaese12, alt: 'The kitchen with dining table' },
+	{ src: inPaese13, alt: 'The room with single beds' },
+	{ src: inPaese14, alt: 'The double bedroom' },
+	{ src: inPaese15, alt: 'The double bedroom with tapestry' },
+	{ src: inPaese16, alt: 'The double bedroom with balcony' },
+];
 
 const rows = [
 	{ period: 'until 12/06', prices: [400, 450, 500] },
@@ -34,13 +70,21 @@ const rows = [
 	<section class="apartment-section">
 		<div class="container apartment-grid">
 			<div class="apartment-image">
-				<Image src={centroImage} alt="City Center Apartment in Vieste" width={1000} height={750} />
+				<Image src={inPaese1} alt="The building on Via Giacomo Leopardi in Vieste, home to the City Center Apartment" width={700} height={700} />
 			</div>
 			<div class="apartment-text">
 				<p class="text-justify">
 					A convenient apartment at Via Giacomo Leopardi 10, in the heart of Vieste, just 500
-					metres from both the Enrico Mattei seafront and the Europa seafront.
+					metres from both the Enrico Mattei seafront and the Europa seafront: ideal for guests
+					who prefer to explore the historic centre, shops and town beaches on foot.
 				</p>
+
+				<ul class="quick-facts">
+					<li><strong>2–4</strong> guests</li>
+					<li><strong>500 m</strong> from the sea</li>
+					<li><strong>2</strong> balconies</li>
+				</ul>
+
 				<h3>The apartment includes</h3>
 				<ul>
 					<li>Entrance</li>
@@ -50,8 +94,25 @@ const rows = [
 					<li>Bathroom</li>
 				</ul>
 				<p>Includes air conditioning, washing machine and linens.</p>
+
+				<p class="tax-note">
+					The municipal tourist tax applies: <strong>€1.00 per person per day</strong> from
+					October to May, <strong>€2.50 per person per day</strong> from June to September, for
+					guests aged 14 and over, up to a maximum of 10 days per person, payable on site.
+				</p>
+
 				<p class="registration">License Code SLFG000580-0070 · CIN IT071060B400124386</p>
 			</div>
+		</div>
+	</section>
+
+	<section class="gallery-section">
+		<div class="container">
+			<header class="text-center">
+				<span class="eyebrow">Discover the apartment</span>
+				<h2>Photo Gallery</h2>
+			</header>
+			<PhotoViewer images={galleryImages} prevLabel="Previous photo" nextLabel="Next photo" />
 		</div>
 	</section>
 
@@ -64,6 +125,17 @@ const rows = [
 			<PriceTable periodLabel="Period" columns={['2p', '3p', '4p']} rows={rows} />
 		</div>
 	</section>
+
+	<ContactInfo
+		eyebrow="Where we are"
+		title="Contact"
+		addressLabel="Address"
+		addressText="Via Giacomo Leopardi 10, Vieste (FG)"
+		mapEmbedTitle="Map of the City Center Apartment"
+		lat={41.8816918}
+		lng={16.1713}
+		mapUrl="https://www.google.com/maps/place/T.M.+in+Paese/@41.8816958,16.1687251,17z/data=!4m6!3m5!1s0x1337c941088f153b:0x7407b2ba7eafc205!8m2!3d41.8816918!4d16.1713!16s%2Fg%2F11z7g_pzl7!5m1!1e2?entry=ttu"
+	/>
 </BaseLayout>
 
 <style>
@@ -83,13 +155,47 @@ const rows = [
 		align-items: center;
 	}
 
+	.apartment-image {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.2em;
+	}
+
 	.apartment-image img {
 		border-radius: var(--border-radius);
 		width: 100%;
+		aspect-ratio: 1 / 1;
 	}
 
 	.apartment-text ul {
 		padding-left: 1.2em;
+	}
+
+	.quick-facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6em;
+		padding-left: 0;
+		list-style: none;
+		margin: 1.2em 0;
+	}
+
+	.quick-facts li {
+		padding: 0.5em 1em;
+		background: var(--color-panel);
+		border-radius: var(--border-radius);
+		font-size: 0.9em;
+		color: var(--color-fg-light);
+	}
+
+	.quick-facts strong {
+		color: var(--color-fg);
+	}
+
+	.tax-note {
+		font-size: 0.9em;
+		color: var(--color-fg-light);
+		margin-top: 1.2em;
 	}
 
 	.registration {

@@ -10,8 +10,8 @@ export const defaultLang: Lang = 'it';
 export const routes = {
 	it: {
 		home: '/',
-		'case-vacanza': '/case-vacanza',
-		'listino-prezzi': '/listino-prezzi',
+		'case-vacanza': '/#case-vacanza',
+		'listino-prezzi': '/#listino-prezzi',
 		regolamento: '/regolamento',
 		'galleria-immagini': '/galleria-immagini',
 		'appartamento-in-centro-paese': '/appartamento-in-centro-paese',
@@ -20,8 +20,8 @@ export const routes = {
 	},
 	en: {
 		home: '/en/',
-		'case-vacanza': '/en/apartments',
-		'listino-prezzi': '/en/prices',
+		'case-vacanza': '/en/#case-vacanza',
+		'listino-prezzi': '/en/#listino-prezzi',
 		regolamento: '/en/rules',
 		'galleria-immagini': '/en/photo-gallery',
 		'appartamento-in-centro-paese': '/en/city-center-apartment',
