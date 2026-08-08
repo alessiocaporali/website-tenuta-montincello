@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RulesList from '../../components/content/RulesList.astro';
+
+const rules = [
+	'Prices refer to the number of guests specified in the booking, and include electricity, water, gas, TV and a parking space.',
+	'The balance must be paid upon delivery of the villa key.',
+	'Bookings are considered valid and confirmed only if accompanied by a deposit equal to 25% of the total stay.',
+	'The booked villa is available from 4:00 PM on the arrival date until 10:00 AM on the departure date.',
+	'It is strictly forbidden to host guests who are not included in the number declared at the time of booking.',
+	'Guests are responsible for safeguarding their personal belongings; management assumes no liability for theft or loss.',
+	'Guests are liable for personal injuries and property damage; parents or guardians are responsible for minors.',
+	'Absolute silence from midnight to 8:00 AM and from 2:00 PM to 4:00 PM.',
+	'In case of no-show, the villa will be held available until midnight of the day following the indicated arrival date.',
+	'A security deposit of €200 will be requested upon key handover, for any damage to the villa or the property.',
+	'Pets must be declared at the time of booking and authorised by management. A surcharge of €50 per week will apply.',
+	'The stay must be paid in full even in case of delayed arrival or early departure.',
+	'No refund is due in case of cancellation.',
+];
+---
+
+<BaseLayout
+	title="Policy"
+	description="House rules and terms of stay for Tenuta Montincello holiday homes in Vieste."
+	currentPage="regolamento"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Terms of stay</span>
+			<h1>House Rules</h1>
+		</div>
+	</section>
+
+	<section class="rules-section">
+		<div class="container">
+			<RulesList rules={rules} />
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.rules-section {
+		padding-top: 0;
+	}
+</style>

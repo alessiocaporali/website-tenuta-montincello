@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/logo-wordmark.png';
+import { getLangFromUrl, useTranslations, useRoutes, routes, type RouteKey } from '../../i18n/ui';
+
+interface Props {
+	currentPage?: RouteKey;
+}
+
+const { currentPage = 'home' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const otherLang = lang === 'it' ? 'en' : 'it';
+const t = useTranslations(lang);
+const r = useRoutes(lang);
+
+const navItems: { key: RouteKey; label: string }[] = [
+	{ key: 'home', label: t('nav.home') },
+	{ key: 'case-vacanza', label: t('nav.apartments') },
+	{ key: 'listino-prezzi', label: t('nav.prices') },
+	{ key: 'regolamento', label: t('nav.rules') },
+	{ key: 'galleria-immagini', label: t('nav.gallery') },
+	{ key: 'appartamento-in-centro-paese', label: t('nav.town') },
+];
+
+const otherLangHref = routes[otherLang][currentPage];
+---
+
+<nav class="navbar">
+	<div class="container nav-inner">
+		<a href={r('home')} class="brand">
+			<Image src={logo} alt="Tenuta Montincello" width={200} />
+		</a>
+
+		<input type="checkbox" id="nav-toggle" class="nav-toggle" />
+		<label for="nav-toggle" class="nav-burger" aria-label="Menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</label>
+
+		<div class="nav-links">
+			{
+				navItems.map((item) => (
+					<a href={r(item.key)} class={currentPage === item.key ? 'active' : ''}>
+						{item.label}
+					</a>
+				))
+			}
+			<a href={otherLangHref} class="lang-switch">{otherLang.toUpperCase()}</a>
+		</div>
+	</div>
+</nav>
+
+<style>
+	.navbar {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: var(--color-bg-transparent);
+		backdrop-filter: blur(6px);
+		border-bottom: 1px solid var(--color-border-bg);
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 0.9em;
+		padding-bottom: 0.9em;
+	}
+
+	.brand {
+		display: flex;
+		align-items: center;
+	}
+
+	.nav-toggle {
+		display: none;
+	}
+
+	.nav-burger {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		cursor: pointer;
+		padding: 0.4em;
+	}
+
+	.nav-burger span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--color-fg-bold);
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 1.6em;
+		flex-wrap: wrap;
+	}
+
+	.nav-links a {
+		color: var(--color-fg);
+		font-size: 0.95em;
+		font-weight: 500;
+	}
+
+	.nav-links a:hover,
+	.nav-links a.active {
+		color: var(--color-accent-olive-dark);
+		text-decoration: none;
+	}
+
+	.lang-switch {
+		font-family: var(--font-family);
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+		padding: 0.25em 0.6em;
+	}
+
+	@media (max-width: 900px) {
+		.nav-burger {
+			display: flex;
+		}
+
+		.nav-links {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.2em;
+			background: var(--color-bg);
+			border-bottom: 1px solid var(--color-border-bg);
+			padding: 1em 2em 1.5em;
+		}
+
+		.nav-links a {
+			width: 100%;
+			padding: 0.6em 0;
+		}
+
+		.nav-toggle:checked ~ .nav-links {
+			display: flex;
+		}
+	}
+</style>

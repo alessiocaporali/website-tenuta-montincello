@@ -1,0 +1,37 @@
+---
+interface Props {
+	eyebrow: string;
+	title: string;
+	addressLabel: string;
+}
+
+const { eyebrow, title, addressLabel } = Astro.props;
+---
+
+<section id="contact" class="alt">
+	<div class="container text-center">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+		<div class="contact-details">
+			<p><a href="tel:+393475097773">+39 347 509 7773</a></p>
+			<p><a href="mailto:tenumont@gmail.com">tenumont@gmail.com</a></p>
+			<p>{addressLabel}: Contrada Montincello 20, Vieste (FG)</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact-details {
+		margin-top: 1.5em;
+		font-size: 1.1em;
+	}
+
+	.contact-details p {
+		margin-bottom: 0.5em;
+	}
+
+	.contact-details a {
+		color: var(--color-fg-bold);
+		font-weight: 600;
+	}
+</style>

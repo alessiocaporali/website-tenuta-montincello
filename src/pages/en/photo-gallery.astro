@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GalleryGrid from '../../components/content/GalleryGrid.astro';
+import gallery1 from '../../assets/images/gallery-1.jpg';
+import gallery2 from '../../assets/images/gallery-2.jpg';
+import gallery3 from '../../assets/images/gallery-3.jpg';
+import gallery4 from '../../assets/images/gallery-4.jpg';
+import gallery5 from '../../assets/images/gallery-5.jpg';
+import gallery6 from '../../assets/images/gallery-6.jpg';
+import gallery7 from '../../assets/images/gallery-7.jpg';
+import gallery8 from '../../assets/images/gallery-8.jpg';
+
+const images = [
+	{ src: gallery1, alt: 'The holiday homes at Tenuta Montincello' },
+	{ src: gallery2, alt: 'The gardens of Tenuta Montincello' },
+	{ src: gallery3, alt: 'The holiday homes surrounded by greenery' },
+	{ src: gallery4, alt: 'View of the holiday homes' },
+	{ src: gallery5, alt: 'The relax area of the estate' },
+	{ src: gallery6, alt: 'The barbecue area of the estate' },
+	{ src: gallery7, alt: 'The sea at Vieste' },
+	{ src: gallery8, alt: 'The Umbra Forest' },
+];
+---
+
+<BaseLayout
+	title="Photo Gallery"
+	description="Photos and videos of Tenuta Montincello, holiday homes in the green of an olive grove in Vieste."
+	currentPage="galleria-immagini"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Discover the estate</span>
+			<h1>Photo Gallery</h1>
+		</div>
+	</section>
+
+	<section class="gallery-section">
+		<div class="container">
+			<GalleryGrid
+				images={images}
+				prevLabel="Previous photo"
+				nextLabel="Next photo"
+				videos={[
+					{ youtubeId: 'AuTeRKHkNtE', title: 'Flying Over the Estate' },
+					{ youtubeId: 'CPaS-_1ptLA', title: 'A Walk Through the Estate' },
+				]}
+			/>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.gallery-section {
+		padding-top: 0;
+	}
+</style>

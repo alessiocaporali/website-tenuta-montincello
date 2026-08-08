@@ -1,0 +1,79 @@
+---
+interface Props {
+	periodLabel: string;
+	columns: string[];
+	rows: { period: string; prices: number[] }[];
+	note?: string;
+}
+
+const { periodLabel, columns, rows, note } = Astro.props;
+---
+
+<div class="price-table-wrap">
+	<table class="price-table">
+		<thead>
+			<tr>
+				<th>{periodLabel}</th>
+				{columns.map((col) => <th>{col}</th>)}
+			</tr>
+		</thead>
+		<tbody>
+			{
+				rows.map((row) => (
+					<tr>
+						<td>{row.period}</td>
+						{row.prices.map((price) => (
+							<td>€{price}</td>
+						))}
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+	{note && <p class="price-note">{note}</p>}
+</div>
+
+<style>
+	.price-table-wrap {
+		overflow-x: auto;
+		margin: 2em 0;
+	}
+
+	.price-table {
+		width: 100%;
+		border-collapse: collapse;
+		background: var(--color-bg);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+	}
+
+	.price-table th,
+	.price-table td {
+		padding: 0.75em 1em;
+		text-align: center;
+		border-bottom: 1px solid var(--color-border-bg);
+		white-space: nowrap;
+	}
+
+	.price-table th {
+		background: var(--color-panel);
+		color: var(--color-fg-bold);
+		font-family: var(--font-family-heading);
+		font-weight: 600;
+	}
+
+	.price-table td:first-child,
+	.price-table th:first-child {
+		text-align: left;
+	}
+
+	.price-table tbody tr:hover {
+		background: var(--color-panel-transparent);
+	}
+
+	.price-note {
+		font-size: 0.85em;
+		color: var(--color-fg-light);
+		margin-top: 0.8em;
+	}
+</style>

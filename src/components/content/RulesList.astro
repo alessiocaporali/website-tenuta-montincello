@@ -1,0 +1,30 @@
+---
+interface Props {
+	rules: string[];
+}
+
+const { rules } = Astro.props;
+---
+
+<ol class="rules-list">
+	{rules.map((rule) => <li>{rule}</li>)}
+</ol>
+
+<style>
+	.rules-list {
+		max-width: 46em;
+		margin: 0 auto;
+		padding-left: 1.4em;
+	}
+
+	.rules-list li {
+		margin-bottom: 1.1em;
+		text-align: justify;
+		color: var(--color-fg);
+	}
+
+	.rules-list li::marker {
+		color: var(--color-accent-terracotta);
+		font-weight: 700;
+	}
+</style>

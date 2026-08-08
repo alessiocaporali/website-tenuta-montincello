@@ -1,0 +1,264 @@
+---
+import { Image } from 'astro:assets';
+import PhotoViewer from './PhotoViewer.astro';
+
+interface GalleryImage {
+	src: ImageMetadata;
+	alt: string;
+}
+
+interface ApartmentData {
+	title: string;
+	rooms: string[];
+	photoNote?: string;
+	planIcon: ImageMetadata;
+	planIconAlt: string;
+	gallery: GalleryImage[];
+}
+
+interface Props {
+	apartments: ApartmentData[];
+	prevLabel?: string;
+	nextLabel?: string;
+}
+
+const { apartments, prevLabel, nextLabel } = Astro.props;
+
+const accentColors = [
+	'var(--color-accent-olive)',
+	'var(--color-accent-terracotta)',
+	'var(--color-accent-sea)',
+	'var(--color-accent-gold)',
+];
+---
+
+<div class="apartment-selector" data-apartment-selector>
+	<div class="apartments-row">
+		{
+			apartments.map((apt, i) => (
+				<button
+					type="button"
+					class="apartment-block"
+					data-apartment-select
+					data-index={i}
+					aria-pressed="false"
+					style={`--block-color: ${accentColors[i % accentColors.length]}`}
+				>
+					<span class="plan-icon-wrap">
+						<Image src={apt.planIcon} alt={apt.planIconAlt} width={200} height={200} class="plan-icon" />
+					</span>
+					<h3>{apt.title}</h3>
+					<ul>
+						{apt.rooms.map((room) => (
+							<li>{room}</li>
+						))}
+					</ul>
+					{apt.photoNote && <span class="photo-note">{apt.photoNote}</span>}
+				</button>
+			))
+		}
+	</div>
+
+	<div class="apartment-panel" data-apartment-panel>
+		<div class="apartment-panel-inner">
+			{
+				apartments.map((apt, i) => (
+					<div
+						class="apartment-gallery"
+						data-apartment-gallery
+						data-index={i}
+						hidden
+						style={`--block-color: ${accentColors[i % accentColors.length]}`}
+					>
+						<h3 class="apartment-gallery-title">{apt.title}</h3>
+						<PhotoViewer images={apt.gallery} prevLabel={prevLabel} nextLabel={nextLabel} />
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<style>
+	.apartments-row {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+		gap: 1.5em;
+	}
+
+	.apartment-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border-bg);
+		border-radius: var(--border-radius);
+		padding: 1.5em 1.2em;
+		cursor: pointer;
+		font-family: inherit;
+		color: inherit;
+		transition:
+			transform 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.apartment-block:hover {
+		transform: translateY(-4px);
+		border-color: var(--color-border);
+	}
+
+	.apartment-block[aria-pressed='true'] {
+		border-color: var(--block-color);
+		box-shadow: 0 0 0 1px var(--block-color);
+	}
+
+	.plan-icon-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 9em;
+		height: 9em;
+		background: var(--color-panel);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		margin-bottom: 1em;
+	}
+
+	.plan-icon-wrap :global(img) {
+		max-width: 85%;
+		max-height: 85%;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.apartment-block h3 {
+		font-size: 1.05em;
+		margin-bottom: 0.6em;
+	}
+
+	.apartment-block ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		color: var(--color-fg);
+		font-size: 0.9em;
+	}
+
+	.apartment-block li {
+		margin-bottom: 0.3em;
+	}
+
+	.photo-note {
+		display: inline-block;
+		margin-top: 1em;
+		font-size: 0.75em;
+		font-weight: 600;
+		color: var(--color-accent-olive-dark);
+		background: var(--color-panel);
+		padding: 0.3em 0.7em;
+		border-radius: 999px;
+	}
+
+	.apartment-panel {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.4s ease;
+		margin-top: 0;
+	}
+
+	.apartment-panel.is-open {
+		grid-template-rows: 1fr;
+		margin-top: 2.7em;
+	}
+
+	.apartment-panel-inner {
+		overflow: hidden;
+		min-height: 0;
+	}
+
+	.apartment-panel.is-open .apartment-panel-inner {
+		position: relative;
+		border: 2px solid var(--panel-color, var(--color-accent-olive));
+		border-radius: var(--border-radius);
+		background: var(--color-bg);
+		padding: 2em;
+		transition: border-color 0.2s ease;
+	}
+
+	.apartment-panel.is-open .apartment-panel-inner::before {
+		content: '';
+		position: absolute;
+		top: -0.7em;
+		left: var(--pointer-left, 50%);
+		width: 1.2em;
+		height: 1.2em;
+		background: var(--color-bg);
+		border-left: 2px solid var(--panel-color, var(--color-accent-olive));
+		border-top: 2px solid var(--panel-color, var(--color-accent-olive));
+		transform: translateX(-50%) rotate(45deg);
+		transition: border-color 0.2s ease;
+	}
+
+	.apartment-gallery[hidden] {
+		display: none;
+	}
+
+	.apartment-gallery-title {
+		margin-bottom: 1em;
+		padding-bottom: 0.5em;
+		border-bottom: 2px solid var(--block-color);
+		color: var(--color-fg-bold);
+	}
+</style>
+
+<script>
+	document.querySelectorAll('[data-apartment-selector]').forEach((root) => {
+		const blocks = Array.from(root.querySelectorAll('[data-apartment-select]'));
+		const row = root.querySelector('.apartments-row');
+		const panel = root.querySelector('[data-apartment-panel]') as HTMLElement | null;
+		const items = Array.from(root.querySelectorAll('[data-apartment-gallery]'));
+		let activeIndex: number | null = null;
+
+		function positionPointer(index: number) {
+			if (!panel || !row) return;
+			const blockRect = blocks[index].getBoundingClientRect();
+			const rowRect = row.getBoundingClientRect();
+			const center = blockRect.left - rowRect.left + blockRect.width / 2;
+			panel.style.setProperty('--pointer-left', `${center}px`);
+		}
+
+		function open(index: number) {
+			items.forEach((item, i) => {
+				(item as HTMLElement).hidden = i !== index;
+			});
+			blocks.forEach((b, i) => b.setAttribute('aria-pressed', String(i === index)));
+			positionPointer(index);
+			const color = getComputedStyle(blocks[index]).getPropertyValue('--block-color').trim();
+			if (color) panel?.style.setProperty('--panel-color', color);
+			panel?.classList.add('is-open');
+			activeIndex = index;
+		}
+
+		function close() {
+			panel?.classList.remove('is-open');
+			blocks.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+			activeIndex = null;
+		}
+
+		blocks.forEach((block, i) => {
+			block.addEventListener('click', () => {
+				if (activeIndex === i) {
+					close();
+				} else {
+					open(i);
+				}
+			});
+		});
+
+		window.addEventListener('resize', () => {
+			if (activeIndex !== null) positionPointer(activeIndex);
+		});
+	});
+</script>

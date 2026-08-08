@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+
+interface GalleryImage {
+	src: ImageMetadata;
+	alt: string;
+}
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	text: string;
+	cta: { href: string; label: string };
+	images: GalleryImage[];
+}
+
+const { eyebrow, title, text, cta, images } = Astro.props;
+---
+
+<section id="case-vacanza">
+	<div class="container text-center overview">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+		<p class="text-justify">{text}</p>
+		<a href={cta.href} class="btn btn-primary">{cta.label}</a>
+	</div>
+
+	<div class="container">
+		<div class="overview-photos">
+			{
+				images.map((img) => (
+					<div class="overview-photo">
+						<Image src={img.src} alt={img.alt} width={500} height={375} />
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.overview {
+		max-width: 46em;
+		margin: 0 auto;
+	}
+
+	.overview p {
+		text-align: center;
+		color: var(--color-fg);
+	}
+
+	.overview .btn {
+		margin-top: 0.6em;
+	}
+
+	.overview-photos {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1.2em;
+		margin-top: 3em;
+	}
+
+	.overview-photo img {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: var(--border-radius);
+	}
+</style>

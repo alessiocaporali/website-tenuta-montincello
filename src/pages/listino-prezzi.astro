@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PriceTable from '../components/content/PriceTable.astro';
+
+const rows = [
+	{ period: 'fino al 12/06', prices: [250, 300, 350, 400, 400, 450] },
+	{ period: '13/06 – 26/06', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '27/06 – 10/07', prices: [350, 400, 450, 500, 500, 550] },
+	{ period: '11/07 – 24/07', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '25/07 – 31/07', prices: [500, 550, 600, 650, 650, 700] },
+	{ period: '01/08 – 07/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '08/08 – 21/08', prices: [800, 850, 900, 950, 950, 1000] },
+	{ period: '22/08 – 28/08', prices: [700, 750, 800, 850, 850, 900] },
+	{ period: '29/08 – 04/09', prices: [400, 450, 500, 550, 550, 600] },
+	{ period: '05/09 – 11/09', prices: [300, 350, 400, 450, 450, 500] },
+	{ period: '12/09 - 26/09', prices: [250, 300, 350, 400, 400, 450] },
+];
+---
+
+<BaseLayout
+	title="Listino Prezzi"
+	description="Prezzi settimanali delle case vacanza della Tenuta Montincello a Vieste, Gargano."
+	currentPage="listino-prezzi"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Tariffe</span>
+			<h1>Listino Prezzi</h1>
+			<p class="intro-text">Prezzi settimanali in euro. Includono i consumi (acqua, luce, gas), posto auto e uso dell'angolo cottura.</p>
+		</div>
+	</section>
+
+	<section class="price-section">
+		<div class="container">
+			<PriceTable
+				periodLabel="Periodo"
+				columns={['Bilo 2p', 'Bilo 3p', 'Bilo 4p', 'Bilo 5p', 'Trilo 4p', 'Trilo 5p']}
+				rows={rows}
+			/>
+
+			<h2>Supplementi</h2>
+			<div class="supplements-list">
+				<div class="supplement-row"><span>Supplemento aria condizionata</span><strong>10 € / giorno</strong></div>
+				<div class="supplement-row"><span>Supplemento animale</span><strong>100 € / settimana</strong></div>
+				<div class="supplement-row"><span>Biancheria da letto (a persona)</span><strong>7,50 €</strong></div>
+				<div class="supplement-row"><span>Biancheria da bagno (a persona)</span><strong>7,50 €</strong></div>
+				<div class="supplement-row"><span>Pulizia finale</span><strong>50 €</strong></div>
+				<div class="supplement-row"><span>Deposito cauzionale</span><strong>200 €</strong></div>
+			</div>
+
+			<h2>Imposta di soggiorno</h2>
+			<p class="text-justify">
+				È dovuta l'imposta di soggiorno comunale: <strong>1,00 € a persona al giorno</strong>
+				nel periodo ottobre–maggio, <strong>2,50 € a persona al giorno</strong> nel periodo
+				giugno–settembre, per ospiti dai 14 anni in su. L'imposta si applica per un massimo di 10
+				giorni a persona e va corrisposta in loco.
+			</p>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.intro-text {
+		max-width: 36em;
+		margin: 1em auto 0;
+	}
+
+	.price-section {
+		padding-top: 0;
+	}
+
+	.price-section h2 {
+		margin-top: 2em;
+	}
+
+	.supplements-list {
+		max-width: 30em;
+		margin: 1.5em 0 2em;
+	}
+
+	.supplement-row {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.6em 0;
+		border-bottom: 1px solid var(--color-border-bg);
+	}
+</style>

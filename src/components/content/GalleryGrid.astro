@@ -1,0 +1,72 @@
+---
+import PhotoViewer from './PhotoViewer.astro';
+
+interface GalleryImage {
+	src: ImageMetadata;
+	alt: string;
+}
+
+interface Video {
+	youtubeId: string;
+	title: string;
+}
+
+interface Props {
+	images: GalleryImage[];
+	videos: Video[];
+	prevLabel?: string;
+	nextLabel?: string;
+}
+
+const { images, videos, prevLabel, nextLabel } = Astro.props;
+---
+
+<PhotoViewer images={images} prevLabel={prevLabel} nextLabel={nextLabel} />
+
+<div class="video-grid">
+	{
+		videos.map((video) => (
+			<div class="video-wrap">
+				<h3>{video.title}</h3>
+				<div class="video-embed">
+					<iframe
+						src={`https://www.youtube.com/embed/${video.youtubeId}`}
+						title={video.title}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					/>
+				</div>
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 2em;
+		margin-top: 3em;
+	}
+
+	.video-wrap h3 {
+		margin-bottom: 0.7em;
+		text-align: center;
+	}
+
+	.video-embed {
+		position: relative;
+		padding-top: 56.25%;
+		border-radius: var(--border-radius);
+		overflow: hidden;
+	}
+
+	.video-embed iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+</style>

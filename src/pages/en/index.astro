@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/landing/Hero.astro';
+import Welcome from '../../components/landing/Welcome.astro';
+import Surroundings from '../../components/landing/Surroundings.astro';
+import WhyUs from '../../components/landing/WhyUs.astro';
+import HolidayHomesOverview from '../../components/landing/HolidayHomesOverview.astro';
+import ServicesOffered from '../../components/landing/ServicesOffered.astro';
+import ContactForm from '../../components/landing/ContactForm.astro';
+import ContactInfo from '../../components/landing/ContactInfo.astro';
+import caseVacanza1 from '../../assets/images/case-vacanza-1.jpg';
+import caseVacanza2 from '../../assets/images/case-vacanza-2.jpg';
+import caseVacanza3 from '../../assets/images/case-vacanza-3.jpg';
+import caseVacanza4 from '../../assets/images/case-vacanza-4.jpg';
+import serviziGiochi from '../../assets/images/servizi-giochi.jpg';
+import serviziRelax from '../../assets/images/servizi-relax.jpg';
+import serviziBbq from '../../assets/images/servizi-bbq.jpg';
+import dintorniVieste from '../../assets/images/dintorni-vieste.jpg';
+import dintorniMare from '../../assets/images/dintorni-mare.jpg';
+import dintorniForesta from '../../assets/images/dintorni-foresta.jpg';
+import iconUliveto from '../../assets/images/cards/icon-uliveto.png';
+import iconCaseVacanza from '../../assets/images/cards/icon-case-vacanza.png';
+import iconMare from '../../assets/images/cards/icon-mare.png';
+import iconGiochi from '../../assets/images/cards/icon-giochi.png';
+import iconBbq from '../../assets/images/cards/icon-bbq.png';
+---
+
+<BaseLayout
+	title="Tenuta Montincello"
+	description="Holiday homes surrounded by an olive grove in Vieste, in the heart of the Gargano National Park, 900 metres from Scialmarino Bay."
+	currentPage="home"
+>
+	<Hero
+		eyebrow="Holiday homes in the green of an olive grove"
+		title="Your holiday in Vieste, in the heart of Gargano!"
+		subtitle="Villas set within a 4,000 sqm olive grove, just steps from the sea and the Gargano National Park."
+		ctaPrimary={{ href: '/en/apartments', label: 'Discover the Holiday Homes' }}
+		ctaSecondary={{ href: '#contact-form', label: 'Request Information' }}
+		imageAlt="Olive grove at Tenuta Montincello in Vieste"
+	/>
+
+	<Welcome
+		eyebrow="Welcome"
+		title="Tenuta Montincello"
+		imageAlt="View of Tenuta Montincello"
+		paragraphs={[
+			'Tenuta Montincello is located within the municipality of Vieste, in the heart of the Gargano National Park, in one of the most striking corners of Puglia. It is just 900 metres from Scialmarino Bay, considered one of the most beautiful beaches in Vieste and the whole of Gargano, with fine sand and crystal-clear water.',
+			'Tenuta Montincello is only 6 km from Vieste, in an area rich in history and charm, home to the ancient Church of Santa Maria di Merino and the Salata Necropolis. The entrance to the Umbra Forest is easily reached in just 12 km.',
+			'Tenuta Montincello is ready to welcome you with open arms, for a stay devoted to nature, history and relaxation.',
+		]}
+	/>
+
+	<Surroundings
+		eyebrow="Nearby"
+		title="What to discover near the estate"
+		places={[
+			{ label: 'Vieste', image: dintorniVieste, imageAlt: 'The historic centre of Vieste by the sea' },
+			{ label: 'Scialmarino Bay', image: dintorniMare, imageAlt: 'The sea at Scialmarino Bay' },
+			{ label: 'Umbra Forest', image: dintorniForesta, imageAlt: 'The Umbra Forest in the Gargano National Park' },
+		]}
+	/>
+
+	<WhyUs
+		eyebrow="Our strengths"
+		title="Why choose us"
+		items={[
+			{ image: iconUliveto, alt: 'Olive grove icon', label: '4,000 sqm olive grove' },
+			{ image: iconCaseVacanza, alt: 'Holiday homes icon', label: 'Newly built holiday homes' },
+			{ image: iconMare, alt: 'Sea icon', label: 'Sea 900 metres away' },
+			{ image: iconGiochi, alt: 'Playground icon', label: "Children's playground" },
+			{ image: iconBbq, alt: 'Barbecue icon', label: 'Barbecue area' },
+		]}
+	/>
+
+	<HolidayHomesOverview
+		eyebrow="The Holiday Homes"
+		title="Holiday homes surrounded by greenery"
+		text="Tenuta Montincello, directly managed by the owners, produces Extra Virgin Olive Oil and offers modern, newly built holiday homes. The fully furnished, air-conditioned villas, equipped with every comfort, are set within a 4,000 sqm olive grove, ideal for those seeking relaxation and contact with nature. One and two-bedroom options are available to suit different stay requirements."
+		cta={{ href: '/en/apartments', label: 'Discover the apartment types' }}
+		images={[
+			{ src: caseVacanza1, alt: 'Holiday home surrounded by the olive grove' },
+			{ src: caseVacanza2, alt: 'Entrance of a holiday home' },
+			{ src: caseVacanza3, alt: 'Exterior of a holiday home' },
+			{ src: caseVacanza4, alt: 'Villa among the olive trees of the estate' },
+		]}
+	/>
+
+	<ServicesOffered
+		eyebrow="Available to guests"
+		title="Services Offered"
+		services={[
+			{ label: "Children's playground", image: serviziGiochi, imageAlt: "Children's playground at the estate" },
+			{ label: 'Relaxation area with billiards and ping pong', image: serviziRelax, imageAlt: 'Relaxation area with billiards at the estate' },
+			{ label: 'Barbecue area', image: serviziBbq, imageAlt: 'Barbecue area at the estate' },
+		]}
+	/>
+
+	<ContactForm
+		eyebrow="Contact"
+		title="Fill in your quote request"
+		labels={{
+			name: 'Full Name',
+			email: 'Email',
+			phone: 'Phone',
+			request: 'Request',
+			submit: 'Send',
+		}}
+		disclaimer="This request is in no way binding. Its acceptance is subject to actual availability of accommodation for the chosen period. Data anonymity is guaranteed under applicable personal data protection regulations."
+	/>
+
+	<ContactInfo eyebrow="Where we are" title="Contact" addressLabel="Address" />
+</BaseLayout>

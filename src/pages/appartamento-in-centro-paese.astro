@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PriceTable from '../components/content/PriceTable.astro';
+import centroImage from '../assets/images/apartment-centro-placeholder.jpg';
+
+const rows = [
+	{ period: 'fino al 12/06', prices: [400, 450, 500] },
+	{ period: '13/06 – 26/06', prices: [450, 500, 550] },
+	{ period: '27/06 – 10/07', prices: [500, 550, 600] },
+	{ period: '11/07 – 24/07', prices: [550, 600, 650] },
+	{ period: '25/07 – 31/07', prices: [650, 700, 750] },
+	{ period: '01/08 – 07/08', prices: [850, 900, 950] },
+	{ period: '08/08 – 21/08', prices: [950, 1000, 1050] },
+	{ period: '22/08 – 28/08', prices: [850, 900, 950] },
+	{ period: '29/08 – 04/09', prices: [550, 600, 650] },
+	{ period: '05/09 – 11/09', prices: [450, 500, 550] },
+	{ period: '12/09 - 26/09', prices: [400, 450, 500] },
+];
+---
+
+<BaseLayout
+	title="Appartamento in Centro Paese"
+	description="Appartamento in affitto nel centro storico di Vieste, a 500 metri dai lungomari Enrico Mattei ed Europa."
+	currentPage="appartamento-in-centro-paese"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Novità</span>
+			<h1>Tenuta Montincello in Paese</h1>
+		</div>
+	</section>
+
+	<section class="apartment-section">
+		<div class="container apartment-grid">
+			<div class="apartment-image">
+				<Image src={centroImage} alt="Appartamento in Centro Paese a Vieste" width={1000} height={750} />
+			</div>
+			<div class="apartment-text">
+				<p class="text-justify">
+					Un comodo appartamento in Via Giacomo Leopardi 10, nel cuore di Vieste, a soli 500 metri
+					sia dal lungomare Enrico Mattei sia dal lungomare Europa.
+				</p>
+				<h3>L'appartamento comprende</h3>
+				<ul>
+					<li>Ingresso</li>
+					<li>Camera matrimoniale con divano letto (soluzione per 2-4 persone)</li>
+					<li>Due balconi</li>
+					<li>Cucina con balcone</li>
+					<li>Bagno</li>
+				</ul>
+				<p>Include aria condizionata, lavatrice e biancheria.</p>
+				<p class="registration">
+					Codice Licenza SLFG000580-0070 · CIN IT071060B400124386
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="price-section alt">
+		<div class="container">
+			<header class="text-center">
+				<span class="eyebrow">Tariffe</span>
+				<h2>Listino Prezzi</h2>
+			</header>
+			<PriceTable periodLabel="Periodo" columns={['2p', '3p', '4p']} rows={rows} />
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.apartment-section {
+		padding-top: 0;
+	}
+
+	.apartment-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.3fr;
+		gap: 3em;
+		align-items: center;
+	}
+
+	.apartment-image img {
+		border-radius: var(--border-radius);
+		width: 100%;
+	}
+
+	.apartment-text ul {
+		padding-left: 1.2em;
+	}
+
+	.registration {
+		font-size: 0.85em;
+		color: var(--color-fg-light);
+		margin-top: 1.5em;
+	}
+
+	@media (max-width: 780px) {
+		.apartment-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

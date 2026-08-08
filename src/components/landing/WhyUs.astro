@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+
+interface Item {
+	image: ImageMetadata;
+	alt: string;
+	label: string;
+}
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	items: Item[];
+}
+
+const { eyebrow, title, items } = Astro.props;
+
+const cardColors = [
+	'var(--color-accent-olive)',
+	'var(--color-accent-terracotta)',
+	'var(--color-accent-sea)',
+	'var(--color-accent-gold)',
+];
+---
+
+<section id="why-us" class="alt why-us">
+	<div class="container">
+		<header class="text-center">
+			<span class="eyebrow">{eyebrow}</span>
+			<h2>{title}</h2>
+		</header>
+		<div class="why-grid">
+			{
+				items.map((item, i) => (
+					<div class="why-card" style={`--card-color: ${cardColors[i % cardColors.length]}`}>
+						<span class="why-icon">
+							<Image src={item.image} alt={item.alt} width={110} height={110} />
+						</span>
+						<p>{item.label}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.why-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: 1.5em;
+		margin-top: 2.5em;
+	}
+
+	.why-card {
+		text-align: center;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border-bg);
+		border-radius: var(--border-radius);
+		padding: 2em 1em;
+		transition:
+			transform 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.why-card:hover {
+		transform: translateY(-4px);
+		border-color: var(--color-border);
+	}
+
+	.why-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 5em;
+		height: 5em;
+		margin: 0 auto 1em;
+		background: var(--card-color);
+		border-radius: 50%;
+	}
+
+	.why-icon :global(img) {
+		width: 60%;
+		height: 60%;
+		object-fit: contain;
+	}
+
+	.why-card p {
+		margin: 0;
+		font-weight: 600;
+		color: var(--color-fg-bold);
+	}
+</style>

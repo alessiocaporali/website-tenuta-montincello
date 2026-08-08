@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+
+interface GalleryImage {
+	src: ImageMetadata;
+	alt: string;
+}
+
+interface Props {
+	images: GalleryImage[];
+	prevLabel?: string;
+	nextLabel?: string;
+}
+
+const { images, prevLabel = 'Previous photo', nextLabel = 'Next photo' } = Astro.props;
+---
+
+<div class="photo-viewer" data-gallery>
+	<div class="viewer-stage">
+		<button type="button" class="viewer-nav viewer-prev" data-gallery-prev aria-label={prevLabel}>
+			‹
+		</button>
+		{
+			images.map((img, i) => (
+				<Image
+					src={img.src}
+					alt={img.alt}
+					width={1400}
+					class="viewer-image"
+					data-gallery-image
+					hidden={i !== 0}
+				/>
+			))
+		}
+		<button type="button" class="viewer-nav viewer-next" data-gallery-next aria-label={nextLabel}>
+			›
+		</button>
+	</div>
+
+	<div class="thumb-strip">
+		{
+			images.map((img, i) => (
+				<button
+					type="button"
+					class="thumb"
+					data-gallery-thumb
+					aria-label={img.alt}
+					aria-current={i === 0 ? 'true' : 'false'}
+				>
+					<Image src={img.src} alt="" width={160} height={120} />
+				</button>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.photo-viewer {
+		width: 100%;
+	}
+
+	.viewer-stage {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 3 / 2;
+		background: var(--color-panel);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+	}
+
+	.viewer-image {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+		display: block;
+	}
+
+	.viewer-image[hidden] {
+		display: none;
+	}
+
+	.viewer-nav {
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+		transform: translateY(-50%);
+		width: 2.4em;
+		height: 2.4em;
+		border: none;
+		border-radius: 50%;
+		background: rgba(47, 42, 31, 0.55);
+		color: #fff;
+		font-size: 1.4em;
+		line-height: 1;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.2s ease;
+	}
+
+	.viewer-nav:hover {
+		background: rgba(47, 42, 31, 0.8);
+	}
+
+	.viewer-prev {
+		left: 0.8em;
+	}
+
+	.viewer-next {
+		right: 0.8em;
+	}
+
+	.thumb-strip {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.6em;
+		margin-top: 1em;
+	}
+
+	.thumb {
+		padding: 0;
+		border: 2px solid transparent;
+		border-radius: calc(var(--border-radius) / 2);
+		overflow: hidden;
+		line-height: 0;
+		background: none;
+		cursor: pointer;
+		opacity: 0.65;
+		transition:
+			border-color 0.2s ease,
+			opacity 0.2s ease;
+	}
+
+	.thumb img {
+		display: block;
+		width: 5em;
+		height: 3.75em;
+		object-fit: cover;
+	}
+
+	.thumb:hover {
+		opacity: 1;
+	}
+
+	.thumb[aria-current='true'] {
+		border-color: var(--color-accent-olive);
+		opacity: 1;
+	}
+</style>
+
+<script>
+	document.querySelectorAll('[data-gallery]').forEach((gallery) => {
+		const images = Array.from(gallery.querySelectorAll('[data-gallery-image]'));
+		const thumbs = Array.from(gallery.querySelectorAll('[data-gallery-thumb]'));
+		const prevBtn = gallery.querySelector('[data-gallery-prev]');
+		const nextBtn = gallery.querySelector('[data-gallery-next]');
+		let current = 0;
+
+		function show(index: number) {
+			current = (index + images.length) % images.length;
+			images.forEach((img, i) => {
+				(img as HTMLElement).hidden = i !== current;
+			});
+			thumbs.forEach((thumb, i) => {
+				thumb.setAttribute('aria-current', String(i === current));
+			});
+		}
+
+		thumbs.forEach((thumb, i) => {
+			thumb.addEventListener('click', () => show(i));
+		});
+
+		prevBtn?.addEventListener('click', () => show(current - 1));
+		nextBtn?.addEventListener('click', () => show(current + 1));
+	});
+</script>

@@ -1,0 +1,157 @@
+/* Design tokens for Tenuta Montincello — warm olive-grove/Puglia identity */
+:root {
+  --color-bg: #faf6ee;
+  --color-bg-transparent: rgba(250, 246, 238, 0.95);
+  --color-panel: #f1e8d6;
+  --color-panel-transparent: rgba(241, 232, 214, 0.96);
+
+  --color-fg-bold: #2f2a1f;
+  --color-fg: rgba(47, 42, 31, 0.82);
+  --color-fg-light: rgba(47, 42, 31, 0.58);
+  --color-fg-lighter: rgba(47, 42, 31, 0.15);
+
+  --color-border: rgba(47, 42, 31, 0.22);
+  --color-border-bg: rgba(47, 42, 31, 0.09);
+
+  --color-accent-olive: #6f7d3f;
+  --color-accent-olive-dark: #4f5c2c;
+  --color-accent-terracotta: #bf5d31;
+  --color-accent-sea: #3f7d80;
+  --color-accent-gold: #c08f2e;
+
+  --font-family: 'Inter', system-ui, Helvetica, sans-serif;
+  --font-family-heading: 'Fraunces', 'Inter', system-ui, serif;
+  --font-weight: 400;
+  --font-weight-bold: 600;
+
+  --container-width: 70em;
+  --border-radius: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--color-fg-bold);
+  margin: 0 0 0.5em 0;
+}
+
+h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.2em;
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+a {
+  color: var(--color-accent-olive-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+section {
+  padding: 6em 0;
+  border-bottom: 1px solid var(--color-border-bg);
+}
+
+section.alt {
+  background: var(--color-panel);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-terracotta);
+  margin-bottom: 0.7em;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85em 1.8em;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--color-accent-olive);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-olive-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-fg-bold);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent-olive);
+}

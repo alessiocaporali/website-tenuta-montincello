@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import welcomeImage from '../../assets/images/welcome.jpg';
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	paragraphs: string[];
+	imageAlt: string;
+}
+
+const { eyebrow, title, paragraphs, imageAlt } = Astro.props;
+---
+
+<section id="welcome">
+	<div class="container welcome-grid">
+		<div class="welcome-image-wrap">
+			<Image src={welcomeImage} alt={imageAlt} width={900} height={1100} />
+		</div>
+		<div class="welcome-text">
+			<span class="eyebrow" style="text-align:left">{eyebrow}</span>
+			<h2>{title}</h2>
+			{paragraphs.map((p) => <p class="text-justify">{p}</p>)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.welcome-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.5fr;
+		gap: 3.5em;
+		align-items: center;
+	}
+
+	.welcome-image-wrap img {
+		border-radius: var(--border-radius);
+		width: 100%;
+		aspect-ratio: 9 / 11;
+		object-fit: cover;
+	}
+
+	@media (max-width: 780px) {
+		.welcome-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+
+interface Service {
+	label: string;
+	image: ImageMetadata;
+	imageAlt: string;
+}
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	services: Service[];
+}
+
+const { eyebrow, title, services } = Astro.props;
+---
+
+<section id="services" class="alt">
+	<div class="container text-center">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+		<div class="services-grid">
+			{
+				services.map((service) => (
+					<div class="service-card">
+						<Image src={service.image} alt={service.imageAlt} width={500} height={375} />
+						<p>{service.label}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.5em;
+		margin-top: 2.5em;
+	}
+
+	.service-card {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border-bg);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		transition:
+			transform 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.service-card:hover {
+		transform: translateY(-4px);
+		border-color: var(--color-border);
+	}
+
+	.service-card img {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+	}
+
+	.service-card p {
+		margin: 0;
+		padding: 1em;
+		font-weight: 600;
+		color: var(--color-fg-bold);
+	}
+</style>

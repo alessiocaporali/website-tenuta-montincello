@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GalleryGrid from '../components/content/GalleryGrid.astro';
+import gallery1 from '../assets/images/gallery-1.jpg';
+import gallery2 from '../assets/images/gallery-2.jpg';
+import gallery3 from '../assets/images/gallery-3.jpg';
+import gallery4 from '../assets/images/gallery-4.jpg';
+import gallery5 from '../assets/images/gallery-5.jpg';
+import gallery6 from '../assets/images/gallery-6.jpg';
+import gallery7 from '../assets/images/gallery-7.jpg';
+import gallery8 from '../assets/images/gallery-8.jpg';
+
+const images = [
+	{ src: gallery1, alt: 'Le case vacanza della Tenuta Montincello' },
+	{ src: gallery2, alt: 'Il giardino della Tenuta Montincello' },
+	{ src: gallery3, alt: 'Le case vacanza immerse nel verde' },
+	{ src: gallery4, alt: 'Vista delle case vacanza' },
+	{ src: gallery5, alt: "L'area relax della Tenuta" },
+	{ src: gallery6, alt: "L'area barbecue della Tenuta" },
+	{ src: gallery7, alt: 'Il mare di Vieste' },
+	{ src: gallery8, alt: 'La Foresta Umbra' },
+];
+---
+
+<BaseLayout
+	title="Galleria Immagini"
+	description="Foto e video della Tenuta Montincello, le case vacanza nel verde di un uliveto a Vieste."
+	currentPage="galleria-immagini"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Scopri la Tenuta</span>
+			<h1>Galleria Immagini</h1>
+		</div>
+	</section>
+
+	<section class="gallery-section">
+		<div class="container">
+			<GalleryGrid
+				images={images}
+				prevLabel="Foto precedente"
+				nextLabel="Foto successiva"
+				videos={[
+					{ youtubeId: 'AuTeRKHkNtE', title: 'In Volo Sulla Tenuta' },
+					{ youtubeId: 'CPaS-_1ptLA', title: 'A Spasso Nella Tenuta' },
+				]}
+			/>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.gallery-section {
+		padding-top: 0;
+	}
+</style>

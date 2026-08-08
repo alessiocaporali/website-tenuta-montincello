@@ -1,0 +1,101 @@
+---
+import { getLangFromUrl, useTranslations, useRoutes } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const r = useRoutes(lang);
+
+const year = new Date().getFullYear();
+
+const copy =
+	lang === 'it'
+		? {
+				address: 'Contrada Montincello 20, Vieste (FG)',
+				vat: 'P. Iva 01831630684 · C.I.N. IT071060B400020484 · Licenza APFG000056-0070',
+			}
+		: {
+				address: 'Contrada Montincello 20, Vieste (FG), Italy',
+				vat: 'VAT 01831630684 · C.I.N. IT071060B400020484 · License APFG000056-0070',
+			};
+
+const navItems = [
+	{ key: 'home', label: t('nav.home') },
+	{ key: 'case-vacanza', label: t('nav.apartments') },
+	{ key: 'listino-prezzi', label: t('nav.prices') },
+	{ key: 'regolamento', label: t('nav.rules') },
+	{ key: 'galleria-immagini', label: t('nav.gallery') },
+	{ key: 'appartamento-in-centro-paese', label: t('nav.town') },
+] as const;
+---
+
+<footer class="site-footer">
+	<div class="container">
+		<nav class="footer-nav">
+			{navItems.map((item) => <a href={r(item.key)}>{item.label}</a>)}
+		</nav>
+
+		<p class="contact-line">
+			{copy.address} · <a href="tel:+393475097773">+39 347 509 7773</a> ·
+			<a href="mailto:tenumont@gmail.com">tenumont@gmail.com</a>
+		</p>
+		<p class="vat-line">{copy.vat}</p>
+
+		<div class="legal-row">
+			<p class="copyright">© {year} Tenuta Montincello</p>
+			<div class="links">
+				<a href={r('privacy-policy')}>{t('footer.privacy')}</a>
+				<a href={r('cookie-policy')}>{t('footer.cookie')}</a>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		padding: 4em 0 3em;
+		background: var(--color-panel);
+		font-size: 0.9em;
+	}
+
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em 1.4em;
+		margin-bottom: 1.6em;
+	}
+
+	.footer-nav a {
+		color: var(--color-fg);
+	}
+
+	.contact-line,
+	.vat-line {
+		color: var(--color-fg-light);
+		margin-bottom: 0.4em;
+	}
+
+	.legal-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1em;
+		margin-top: 2em;
+		padding-top: 1.6em;
+		border-top: 1px solid var(--color-border-bg);
+	}
+
+	.copyright {
+		margin: 0;
+		color: var(--color-fg-light);
+	}
+
+	.links {
+		display: flex;
+		gap: 1.2em;
+	}
+
+	.links a {
+		color: var(--color-fg-light);
+	}
+</style>

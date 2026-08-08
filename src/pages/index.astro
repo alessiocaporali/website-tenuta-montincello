@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/landing/Hero.astro';
+import Welcome from '../components/landing/Welcome.astro';
+import Surroundings from '../components/landing/Surroundings.astro';
+import WhyUs from '../components/landing/WhyUs.astro';
+import HolidayHomesOverview from '../components/landing/HolidayHomesOverview.astro';
+import ServicesOffered from '../components/landing/ServicesOffered.astro';
+import ContactForm from '../components/landing/ContactForm.astro';
+import ContactInfo from '../components/landing/ContactInfo.astro';
+import caseVacanza1 from '../assets/images/case-vacanza-1.jpg';
+import caseVacanza2 from '../assets/images/case-vacanza-2.jpg';
+import caseVacanza3 from '../assets/images/case-vacanza-3.jpg';
+import caseVacanza4 from '../assets/images/case-vacanza-4.jpg';
+import serviziGiochi from '../assets/images/servizi-giochi.jpg';
+import serviziRelax from '../assets/images/servizi-relax.jpg';
+import serviziBbq from '../assets/images/servizi-bbq.jpg';
+import dintorniVieste from '../assets/images/dintorni-vieste.jpg';
+import dintorniMare from '../assets/images/dintorni-mare.jpg';
+import dintorniForesta from '../assets/images/dintorni-foresta.jpg';
+import iconUliveto from '../assets/images/cards/icon-uliveto.png';
+import iconCaseVacanza from '../assets/images/cards/icon-case-vacanza.png';
+import iconMare from '../assets/images/cards/icon-mare.png';
+import iconGiochi from '../assets/images/cards/icon-giochi.png';
+import iconBbq from '../assets/images/cards/icon-bbq.png';
+---
+
+<BaseLayout
+	title="Tenuta Montincello"
+	description="Case vacanza immerse in un uliveto a Vieste, nel cuore del Parco Nazionale del Gargano, a 900 metri dalla Baia di Scialmarino."
+	currentPage="home"
+>
+	<Hero
+		eyebrow="Case vacanze nel verde di un uliveto"
+		title="La tua vacanza a Vieste, nel cuore del Gargano!"
+		subtitle="Villette immerse in un uliveto di 4.000 mq, a due passi dal mare e dal Parco Nazionale del Gargano."
+		ctaPrimary={{ href: '/case-vacanza', label: 'Scopri le Case Vacanza' }}
+		ctaSecondary={{ href: '#contact-form', label: 'Richiedi Informazioni' }}
+		imageAlt="Uliveto della Tenuta Montincello a Vieste"
+	/>
+
+	<Welcome
+		eyebrow="Benvenuti"
+		title="La Tenuta Montincello"
+		imageAlt="Panorama della Tenuta Montincello"
+		paragraphs={[
+			'La Tenuta Montincello si trova nel territorio del Comune di Vieste, nel cuore del Parco Nazionale del Gargano, in uno degli angoli più suggestivi della Puglia. Dista appena 900 metri dalla Baia di Scialmarino, considerata tra le spiagge più belle di Vieste e dell’intero Gargano, caratterizzata da sabbia finissima e mare cristallino.',
+			'La Tenuta Montincello si trova a soli 6 km da Vieste, in un territorio ricco di storia e fascino, dove sorgono l’antica chiesa di Santa Maria di Merino e la Necropoli della Salata. L’ingresso della Foresta Umbra è facilmente raggiungibile in appena 12 km.',
+			'La Tenuta Montincello è pronta ad accogliervi a braccia aperte, per regalarvi un soggiorno all’insegna della natura, della storia e del relax.',
+		]}
+	/>
+
+	<Surroundings
+		eyebrow="Nei dintorni"
+		title="Cosa scoprire vicino alla Tenuta"
+		places={[
+			{ label: 'Vieste', image: dintorniVieste, imageAlt: 'Il centro storico di Vieste sul mare' },
+			{ label: 'Baia di Scialmarino', image: dintorniMare, imageAlt: 'Il mare della Baia di Scialmarino' },
+			{ label: 'Foresta Umbra', image: dintorniForesta, imageAlt: 'La Foresta Umbra nel Parco Nazionale del Gargano' },
+		]}
+	/>
+
+	<WhyUs
+		eyebrow="I nostri punti di forza"
+		title="Perché scegliere noi"
+		items={[
+			{ image: iconUliveto, alt: 'Icona uliveto', label: 'Uliveto di 4.000 mq' },
+			{ image: iconCaseVacanza, alt: 'Icona case vacanza', label: 'Case vacanza di nuova costruzione' },
+			{ image: iconMare, alt: 'Icona mare', label: 'Mare a 900 metri' },
+			{ image: iconGiochi, alt: 'Icona parco giochi', label: 'Parco giochi per bambini' },
+			{ image: iconBbq, alt: 'Icona barbecue', label: 'Area barbecue' },
+		]}
+	/>
+
+	<HolidayHomesOverview
+		eyebrow="Le Case Vacanza"
+		title="Case vacanza immerse nel verde"
+		text="La Tenuta Montincello, gestita direttamente dai proprietari, oltre a produrre Olio Extravergine di Oliva, offre moderne case vacanza di nuova costruzione. Le villette, completamente arredate, climatizzate e dotate di ogni comfort, sono immerse nel verde di un uliveto di 4.000 mq, ideale per chi desidera relax e contatto con la natura. Sono disponibili soluzioni con una o due camere da letto, adatte a diverse esigenze di soggiorno."
+		cta={{ href: '/case-vacanza', label: 'Scopri le tipologie di casa vacanza' }}
+		images={[
+			{ src: caseVacanza1, alt: 'Casa vacanza immersa nell’uliveto' },
+			{ src: caseVacanza2, alt: 'Ingresso di una casa vacanza' },
+			{ src: caseVacanza3, alt: 'Esterno di una casa vacanza' },
+			{ src: caseVacanza4, alt: 'Villetta tra gli ulivi della Tenuta' },
+		]}
+	/>
+
+	<ServicesOffered
+		eyebrow="A disposizione degli ospiti"
+		title="Servizi Offerti"
+		services={[
+			{ label: 'Parco giochi per bambini', image: serviziGiochi, imageAlt: 'Parco giochi per bambini nella Tenuta' },
+			{ label: 'Area relax con biliardino e ping pong', image: serviziRelax, imageAlt: 'Area relax con biliardino della Tenuta' },
+			{ label: 'Area barbecue', image: serviziBbq, imageAlt: 'Area barbecue della Tenuta' },
+		]}
+	/>
+
+	<ContactForm
+		eyebrow="Contatti"
+		title="Compila la tua richiesta di preventivo"
+		labels={{
+			name: 'Nome e Cognome',
+			email: 'Email',
+			phone: 'Telefono',
+			request: 'Richiesta',
+			submit: 'Invia',
+		}}
+		disclaimer="La seguente richiesta non è in alcun modo vincolante. L'accettazione della stessa è subordinata alle reali disponibilità di alloggi per il periodo prescelto. È garantita l'anonimità dei dati ai sensi della normativa vigente sulla tutela dei dati personali."
+	/>
+
+	<ContactInfo eyebrow="Dove siamo" title="Contatti" addressLabel="Indirizzo" />
+</BaseLayout>

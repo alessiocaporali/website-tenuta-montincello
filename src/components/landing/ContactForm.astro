@@ -1,0 +1,118 @@
+---
+interface Props {
+	eyebrow: string;
+	title: string;
+	labels: { name: string; email: string; phone: string; request: string; submit: string };
+	disclaimer: string;
+}
+
+const { eyebrow, title, labels, disclaimer } = Astro.props;
+
+const formId = import.meta.env.PUBLIC_FORMSPREE_ID;
+const formAction = formId ? `https://formspree.io/f/${formId}` : '#';
+---
+
+<section id="contact-form">
+	<div class="container">
+		<header class="text-center">
+			<span class="eyebrow">{eyebrow}</span>
+			<h2>{title}</h2>
+		</header>
+
+		{
+			!formId && (
+				<p class="setup-note">
+					⚠️ Form not yet connected — create a form at
+					<a href="https://formspree.io" target="_blank" rel="noreferrer">
+						formspree.io
+					</a>{' '}
+					and set <code>PUBLIC_FORMSPREE_ID</code> in <code>.env</code>.
+				</p>
+			)
+		}
+
+		<form class="inquiry-form" action={formAction} method="POST">
+			<div class="field">
+				<label for="name">{labels.name} *</label>
+				<input type="text" id="name" name="name" required />
+			</div>
+			<div class="field">
+				<label for="email">{labels.email} *</label>
+				<input type="email" id="email" name="email" required />
+			</div>
+			<div class="field">
+				<label for="phone">{labels.phone} *</label>
+				<input type="tel" id="phone" name="phone" required />
+			</div>
+			<div class="field field-full">
+				<label for="request">{labels.request} *</label>
+				<textarea id="request" name="request" rows="4" required></textarea>
+			</div>
+			<div class="field-full">
+				<button type="submit" class="btn btn-primary">{labels.submit}</button>
+				<p class="disclaimer">{disclaimer}</p>
+			</div>
+		</form>
+	</div>
+</section>
+
+<style>
+	.setup-note {
+		max-width: 40em;
+		margin: 0 auto 2em;
+		padding: 0.8em 1.2em;
+		background: #fdf1e6;
+		border: 1px solid var(--color-accent-terracotta);
+		border-radius: var(--border-radius);
+		font-size: 0.9em;
+		text-align: center;
+	}
+
+	.inquiry-form {
+		max-width: 44em;
+		margin: 2.5em auto 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2em;
+	}
+
+	.field-full {
+		grid-column: 1 / -1;
+	}
+
+	label {
+		display: block;
+		font-weight: 600;
+		color: var(--color-fg-bold);
+		margin-bottom: 0.4em;
+		font-size: 0.9em;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		font-family: var(--font-family);
+		font-size: 1em;
+		padding: 0.7em 0.9em;
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+		background: var(--color-bg);
+		color: var(--color-fg-bold);
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	.disclaimer {
+		margin-top: 1em;
+		font-size: 0.8em;
+		color: var(--color-fg-light);
+	}
+
+	@media (max-width: 640px) {
+		.inquiry-form {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

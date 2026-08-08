@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RulesList from '../components/content/RulesList.astro';
+
+const rules = [
+	'I prezzi sono riferiti al numero di persone specificate nella prenotazione, e sono comprensivi di consumo di luce, acqua, gas, TV e posto auto.',
+	'Il saldo deve essere effettuato alla consegna della chiave della villetta.',
+	'Le prenotazioni si ritengono valide e quindi confermate solo se accompagnate da un acconto pari al 25% dell\'intero soggiorno.',
+	'La villetta prenotata è a disposizione dalle ore 16:00 del giorno indicato per l\'arrivo sino alle ore 10:00 del giorno indicato per la partenza.',
+	'È assolutamente vietato ospitare persone che non siano comprese nel numero dichiarato al momento della prenotazione.',
+	'Gli ospiti sono responsabili della custodia dei propri effetti personali; la gestione non risponde di eventuali furti o smarrimenti.',
+	'Gli ospiti sono responsabili di eventuali danni a cose e persone; i genitori o tutori sono responsabili dei minori.',
+	'Silenzio assoluto dalle 24:00 alle 08:00 e dalle 14:00 alle 16:00.',
+	'In caso di mancato arrivo, la villetta sarà tenuta a disposizione fino alle ore 24:00 del giorno successivo a quello indicato come arrivo nella prenotazione.',
+	'Alla consegna della chiave sarà richiesta una cauzione di 200 €, per eventuali danni nella villetta e nella struttura.',
+	'Gli animali domestici devono essere segnalati al momento della prenotazione e autorizzati dal gestore. Sarà applicato un supplemento di 50 € a settimana.',
+	'Il soggiorno va pagato anche in caso di ritardato arrivo o di anticipata partenza.',
+	'Non è dovuto rimborso in caso di rinuncia.',
+];
+---
+
+<BaseLayout
+	title="Regolamento"
+	description="Regolamento e condizioni di soggiorno per le case vacanza della Tenuta Montincello a Vieste."
+	currentPage="regolamento"
+>
+	<section class="page-header">
+		<div class="container text-center">
+			<span class="eyebrow">Condizioni di soggiorno</span>
+			<h1>Regolamento</h1>
+		</div>
+	</section>
+
+	<section class="rules-section">
+		<div class="container">
+			<RulesList rules={rules} />
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.page-header {
+		padding-top: 5em;
+		padding-bottom: 2em;
+	}
+
+	.rules-section {
+		padding-top: 0;
+	}
+</style>

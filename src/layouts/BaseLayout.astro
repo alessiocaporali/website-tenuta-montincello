@@ -1,0 +1,124 @@
+---
+import { getImage } from 'astro:assets';
+import SiteFooter from '../components/landing/SiteFooter.astro';
+import NavBar from '../components/landing/NavBar.astro';
+import faviconSource from '../assets/images/favicon-source.png';
+import defaultOgSource from '../assets/images/og-default.jpg';
+import '@fontsource/fraunces/500.css';
+import '@fontsource/fraunces/600.css';
+import '@fontsource/fraunces/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '../styles/global.css';
+import { getLangFromUrl, routes, type Lang, type RouteKey } from '../i18n/ui';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: { src: ImageMetadata; alt: string };
+	type?: 'website' | 'article';
+	noindex?: boolean;
+	currentPage?: RouteKey;
+}
+
+const SITE_NAME = 'Tenuta Montincello';
+
+const {
+	title = 'Tenuta Montincello',
+	description = 'Case vacanza immerse in un uliveto a Vieste, nel cuore del Parco Nazionale del Gargano, a pochi passi dalla Baia di Scialmarino.',
+	image,
+	type = 'website',
+	noindex = false,
+	currentPage = 'home',
+} = Astro.props;
+
+const lang: Lang = getLangFromUrl(Astro.url);
+const pageTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
+
+const favicon32 = await getImage({ src: faviconSource, width: 32, height: 32, format: 'png' });
+const favicon180 = await getImage({ src: faviconSource, width: 180, height: 180, format: 'png' });
+
+const ogSource = image?.src ?? defaultOgSource;
+const ogAlt = image?.alt ?? 'Tenuta Montincello, case vacanza a Vieste nel Gargano';
+const ogImage = await getImage({
+	src: ogSource,
+	width: 1200,
+	height: 630,
+	fit: 'cover',
+	format: 'jpg',
+});
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage.src, Astro.site);
+
+const alternateIt = new URL(routes.it.home, Astro.site).toString();
+const alternateEn = new URL(routes.en.home, Astro.site).toString();
+
+const lodgingSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'LodgingBusiness',
+	name: 'Tenuta Montincello',
+	alternateName: 'Tenuta Montincello di Disanti Anna Maria',
+	url: 'https://www.tenutamontincello.it',
+	logo: new URL(favicon180.src, Astro.site).toString(),
+	description:
+		'Tenuta Montincello offre case vacanza immerse in un uliveto a Vieste, nel Parco Nazionale del Gargano, a 900 metri dalla Baia di Scialmarino.',
+	email: 'tenumont@gmail.com',
+	telephone: '+39 3475097773',
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: 'Contrada Montincello 20',
+		addressLocality: 'Vieste',
+		postalCode: '71019',
+		addressRegion: 'FG',
+		addressCountry: 'IT',
+	},
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="alternate" hreflang="it" href={alternateIt} />
+		<link rel="alternate" hreflang="en" href={alternateEn} />
+		<link rel="alternate" hreflang="x-default" href={alternateIt} />
+		<link rel="icon" type="image/png" sizes="32x32" href={favicon32.src} />
+		<link rel="apple-touch-icon" href={favicon180.src} />
+		<title>{pageTitle}</title>
+
+		<!-- Open Graph -->
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogAlt} />
+		<meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content={ogAlt} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(lodgingSchema)} is:inline />
+
+		<slot name="head" />
+	</head>
+	<body>
+		<NavBar currentPage={currentPage} />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>

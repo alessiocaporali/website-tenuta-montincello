@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+
+interface Place {
+	label: string;
+	image: ImageMetadata;
+	imageAlt: string;
+}
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	places: Place[];
+}
+
+const { eyebrow, title, places } = Astro.props;
+---
+
+<section id="dintorni">
+	<div class="container text-center">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+		<div class="places-grid">
+			{
+				places.map((place) => (
+					<div class="place-card">
+						<Image src={place.image} alt={place.imageAlt} width={500} height={375} />
+						<p>{place.label}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.places-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.5em;
+		margin-top: 2.5em;
+	}
+
+	.place-card {
+		position: relative;
+		border-radius: var(--border-radius);
+		overflow: hidden;
+	}
+
+	.place-card img {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		display: block;
+	}
+
+	.place-card p {
+		position: absolute;
+		inset: auto 0 0 0;
+		margin: 0;
+		padding: 2em 1em 1em;
+		font-weight: 600;
+		color: #fff;
+		text-align: center;
+		background: linear-gradient(180deg, rgba(47, 42, 31, 0) 0%, rgba(47, 42, 31, 0.75) 100%);
+	}
+</style>

@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../../assets/images/hero.jpg';
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	subtitle: string;
+	ctaPrimary: { href: string; label: string };
+	ctaSecondary: { href: string; label: string };
+	imageAlt: string;
+}
+
+const { eyebrow, title, subtitle, ctaPrimary, ctaSecondary, imageAlt } = Astro.props;
+---
+
+<section class="hero">
+	<Image src={heroImage} alt={imageAlt} width={1600} height={900} class="hero-image" priority />
+	<div class="hero-overlay"></div>
+	<div class="container hero-content">
+		<span class="eyebrow eyebrow-light">{eyebrow}</span>
+		<h1>{title}</h1>
+		<p class="subtitle">{subtitle}</p>
+		<div class="cta-group">
+			<a href={ctaPrimary.href} class="btn btn-primary">{ctaPrimary.label}</a>
+			<a href={ctaSecondary.href} class="btn btn-secondary btn-on-image">{ctaSecondary.label}</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 88vh;
+		display: flex;
+		align-items: flex-end;
+		border-bottom: none;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.hero-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(47, 42, 31, 0.15) 0%, rgba(47, 42, 31, 0.85) 100%);
+	}
+
+	.hero-content {
+		position: relative;
+		padding-bottom: 4.5em;
+		padding-top: 4em;
+		color: #fff;
+		max-width: 40em;
+	}
+
+	.eyebrow-light {
+		color: #f1e8d6;
+		text-align: left;
+	}
+
+	h1 {
+		color: #fff;
+		font-size: 2.8em;
+		margin-bottom: 0.4em;
+	}
+
+	.subtitle {
+		font-size: 1.15em;
+		color: rgba(255, 255, 255, 0.88);
+		max-width: 32em;
+	}
+
+	.cta-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1em;
+		margin-top: 1.6em;
+	}
+
+	.btn-on-image {
+		border-color: rgba(255, 255, 255, 0.55);
+		color: #fff;
+	}
+
+	.btn-on-image:hover {
+		border-color: #fff;
+	}
+
+	@media (max-width: 640px) {
+		h1 {
+			font-size: 2.1em;
+		}
+	}
+</style>
