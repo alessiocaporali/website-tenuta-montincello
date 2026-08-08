@@ -1,47 +1,74 @@
 ---
 import { Image } from 'astro:assets';
-import welcomeImage from '../../assets/images/welcome.jpg';
+
+interface WelcomeImage {
+	src: ImageMetadata;
+	alt: string;
+}
 
 interface Props {
 	eyebrow: string;
 	title: string;
 	paragraphs: string[];
-	imageAlt: string;
+	images: WelcomeImage[];
 }
 
-const { eyebrow, title, paragraphs, imageAlt } = Astro.props;
+const { eyebrow, title, paragraphs, images } = Astro.props;
 ---
 
 <section id="welcome">
-	<div class="container welcome-grid">
-		<div class="welcome-image-wrap">
-			<Image src={welcomeImage} alt={imageAlt} width={900} height={1100} />
-		</div>
-		<div class="welcome-text">
-			<span class="eyebrow" style="text-align:left">{eyebrow}</span>
-			<h2>{title}</h2>
-			{paragraphs.map((p) => <p class="text-justify">{p}</p>)}
+	<div class="container text-center welcome-header">
+		<span class="eyebrow">{eyebrow}</span>
+		<h2>{title}</h2>
+	</div>
+
+	<div class="container welcome-text">
+		{paragraphs.map((p) => <p class="text-justify">{p}</p>)}
+	</div>
+
+	<div class="container">
+		<div class="welcome-photos">
+			{
+				images.map((img) => (
+					<div class="welcome-photo">
+						<Image src={img.src} alt={img.alt} width={500} height={375} />
+					</div>
+				))
+			}
 		</div>
 	</div>
 </section>
 
 <style>
-	.welcome-grid {
+	.welcome-header {
+		margin-bottom: 2.5em;
+	}
+
+	.welcome-photos {
 		display: grid;
-		grid-template-columns: 1fr 1.5fr;
-		gap: 3.5em;
-		align-items: center;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.2em;
+		margin-top: 2.5em;
 	}
 
-	.welcome-image-wrap img {
-		border-radius: var(--border-radius);
+	.welcome-photo img {
 		width: 100%;
-		aspect-ratio: 9 / 11;
+		aspect-ratio: 4 / 3;
 		object-fit: cover;
+		border-radius: var(--border-radius);
 	}
 
-	@media (max-width: 780px) {
-		.welcome-grid {
+	.welcome-text {
+		max-width: 46em;
+		margin: 0 auto;
+	}
+
+	.welcome-text p {
+		color: var(--color-fg);
+	}
+
+	@media (max-width: 640px) {
+		.welcome-photos {
 			grid-template-columns: 1fr;
 		}
 	}

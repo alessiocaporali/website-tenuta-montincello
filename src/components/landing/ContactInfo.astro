@@ -3,35 +3,107 @@ interface Props {
 	eyebrow: string;
 	title: string;
 	addressLabel: string;
+	mapUrl: string;
+	mapEmbedTitle: string;
 }
 
-const { eyebrow, title, addressLabel } = Astro.props;
+const { eyebrow, title, addressLabel, mapUrl, mapEmbedTitle } = Astro.props;
+
+const mapEmbedSrc = 'https://www.google.com/maps?q=41.9084365,16.1123327&z=16&output=embed';
+
+const icons = {
+	phone: '<path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 1-2Z"/>',
+	email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+	pin: '<path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/>',
+};
 ---
 
-<section id="contact" class="alt">
+<section id="contact">
 	<div class="container text-center">
 		<span class="eyebrow">{eyebrow}</span>
 		<h2>{title}</h2>
+	</div>
+
+	<div class="container contact-grid">
+		<div class="map-embed">
+			<iframe
+				src={mapEmbedSrc}
+				title={mapEmbedTitle}
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+			/>
+		</div>
+
 		<div class="contact-details">
-			<p><a href="tel:+393475097773">+39 347 509 7773</a></p>
-			<p><a href="mailto:tenumont@gmail.com">tenumont@gmail.com</a></p>
-			<p>{addressLabel}: Contrada Montincello 20, Vieste (FG)</p>
+			<p class="contact-row">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons.phone} />
+				<a href="tel:+393475097773">+39 347 509 7773</a>
+			</p>
+			<p class="contact-row">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons.email} />
+				<a href="mailto:tenumont@gmail.com">tenumont@gmail.com</a>
+			</p>
+			<p class="contact-row">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons.pin} />
+				<span>
+					{addressLabel}:
+					<a href={mapUrl} target="_blank" rel="noreferrer">Contrada Montincello 20, Vieste (FG)</a>
+				</span>
+			</p>
 		</div>
 	</div>
 </section>
 
 <style>
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3em;
+		align-items: center;
+		margin-top: 2.5em;
+	}
+
+	.map-embed {
+		aspect-ratio: 4 / 3;
+		border: 1px solid var(--color-border-bg);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+	}
+
+	.map-embed iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+		display: block;
+	}
+
 	.contact-details {
-		margin-top: 1.5em;
+		text-align: left;
 		font-size: 1.1em;
 	}
 
-	.contact-details p {
-		margin-bottom: 0.5em;
+	.contact-row {
+		display: flex;
+		align-items: center;
+		gap: 0.9em;
+		margin-bottom: 1.2em;
 	}
 
-	.contact-details a {
+	.contact-row svg {
+		flex-shrink: 0;
+		width: 1.6em;
+		height: 1.6em;
+		color: var(--color-accent-olive-dark);
+	}
+
+	.contact-row a {
 		color: var(--color-fg-bold);
 		font-weight: 600;
+	}
+
+	@media (max-width: 700px) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

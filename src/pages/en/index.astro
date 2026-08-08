@@ -6,8 +6,10 @@ import Surroundings from '../../components/landing/Surroundings.astro';
 import WhyUs from '../../components/landing/WhyUs.astro';
 import HolidayHomesOverview from '../../components/landing/HolidayHomesOverview.astro';
 import ServicesOffered from '../../components/landing/ServicesOffered.astro';
-import ContactForm from '../../components/landing/ContactForm.astro';
 import ContactInfo from '../../components/landing/ContactInfo.astro';
+import welcome1 from '../../assets/images/welcome-1.jpg';
+import welcome2 from '../../assets/images/welcome-2.jpg';
+import welcome3 from '../../assets/images/welcome-3.jpg';
 import caseVacanza1 from '../../assets/images/case-vacanza-1.jpg';
 import caseVacanza2 from '../../assets/images/case-vacanza-2.jpg';
 import caseVacanza3 from '../../assets/images/case-vacanza-3.jpg';
@@ -35,14 +37,18 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 		title="Your holiday in Vieste, in the heart of Gargano!"
 		subtitle="Villas set within a 4,000 sqm olive grove, just steps from the sea and the Gargano National Park."
 		ctaPrimary={{ href: '/en/apartments', label: 'Discover the Holiday Homes' }}
-		ctaSecondary={{ href: '#contact-form', label: 'Request Information' }}
+		ctaSecondary={{ href: '#contact', label: 'Request Information' }}
 		imageAlt="Olive grove at Tenuta Montincello in Vieste"
 	/>
 
 	<Welcome
 		eyebrow="Welcome"
 		title="Tenuta Montincello"
-		imageAlt="View of Tenuta Montincello"
+		images={[
+			{ src: welcome1, alt: 'The main villa at Tenuta Montincello among the olive trees' },
+			{ src: welcome2, alt: 'The barbecue and playground area at the estate' },
+			{ src: welcome3, alt: 'The relax gazebo at the estate among the olive trees' },
+		]}
 		paragraphs={[
 			'Tenuta Montincello is located within the municipality of Vieste, in the heart of the Gargano National Park, in one of the most striking corners of Puglia. It is just 900 metres from Scialmarino Bay, considered one of the most beautiful beaches in Vieste and the whole of Gargano, with fine sand and crystal-clear water.',
 			'Tenuta Montincello is only 6 km from Vieste, in an area rich in history and charm, home to the ancient Church of Santa Maria di Merino and the Salata Necropolis. The entrance to the Umbra Forest is easily reached in just 12 km.',
@@ -65,8 +71,8 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 		title="Why choose us"
 		items={[
 			{ image: iconUliveto, alt: 'Olive grove icon', label: '4,000 sqm olive grove' },
-			{ image: iconCaseVacanza, alt: 'Holiday homes icon', label: 'Newly built holiday homes' },
-			{ image: iconMare, alt: 'Sea icon', label: 'Sea 900 metres away' },
+			{ image: iconCaseVacanza, alt: 'Holiday homes icon', label: '5 newly built holiday homes' },
+			{ image: iconMare, alt: 'Sea icon', label: 'Sea 900 m away, Scialmarino Bay' },
 			{ image: iconGiochi, alt: 'Playground icon', label: "Children's playground" },
 			{ image: iconBbq, alt: 'Barbecue icon', label: 'Barbecue area' },
 		]}
@@ -95,18 +101,11 @@ import iconBbq from '../../assets/images/cards/icon-bbq.png';
 		]}
 	/>
 
-	<ContactForm
-		eyebrow="Contact"
-		title="Fill in your quote request"
-		labels={{
-			name: 'Full Name',
-			email: 'Email',
-			phone: 'Phone',
-			request: 'Request',
-			submit: 'Send',
-		}}
-		disclaimer="This request is in no way binding. Its acceptance is subject to actual availability of accommodation for the chosen period. Data anonymity is guaranteed under applicable personal data protection regulations."
+	<ContactInfo
+		eyebrow="Where we are"
+		title="Contact"
+		addressLabel="Address"
+		mapEmbedTitle="Map of Tenuta Montincello"
+		mapUrl="https://www.google.com/maps/place/Tenuta+Montincello/@41.9084405,16.1097578,17z/data=!4m24!1m12!3m11!1s0x1337c8141669d605:0x7cf28d14d9661ac4!2sTenuta+Montincello!5m4!1s2026-10-30!2i3!4m1!1i2!8m2!3d41.9084365!4d16.1123327!16s%2Fg%2F1td8n18m!3m10!1s0x1337c8141669d605:0x7cf28d14d9661ac4!5m4!1s2026-10-30!2i3!4m1!1i2!8m2!3d41.9084365!4d16.1123327!16s%2Fg%2F1td8n18m!5m1!1e2?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D"
 	/>
-
-	<ContactInfo eyebrow="Where we are" title="Contact" addressLabel="Address" />
 </BaseLayout>

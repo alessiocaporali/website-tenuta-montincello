@@ -39,7 +39,7 @@ export const ui = {
 		'nav.prices': 'Listino Prezzi',
 		'nav.rules': 'Regolamento',
 		'nav.gallery': 'Galleria Immagini',
-		'nav.town': 'Appartamento in Centro Paese',
+		'nav.town': 'Appartamento in Paese',
 		'footer.privacy': 'Privacy Policy',
 		'footer.cookie': 'Cookie Policy',
 	},
