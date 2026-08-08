@@ -50,7 +50,7 @@ const { eyebrow, title, subtitle, ctaPrimary, ctaSecondary, imageAlt } = Astro.p
 	.hero-overlay {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(180deg, rgba(47, 42, 31, 0.15) 0%, rgba(47, 42, 31, 0.85) 100%);
+		background: linear-gradient(180deg, rgba(47, 42, 31, 0.05) 0%, rgba(47, 42, 31, 0.7) 100%);
 	}
 
 	.hero-content {
@@ -85,13 +85,18 @@ const { eyebrow, title, subtitle, ctaPrimary, ctaSecondary, imageAlt } = Astro.p
 		margin-top: 1.6em;
 	}
 
+	.cta-group .btn-primary,
 	.btn-on-image {
-		border-color: rgba(255, 255, 255, 0.55);
+		background: transparent;
+		border-color: var(--color-panel);
 		color: #fff;
 	}
 
+	.cta-group .btn-primary:hover,
 	.btn-on-image:hover {
-		border-color: #fff;
+		background: var(--color-panel-sea);
+		border-color: var(--color-panel-sea);
+		color: var(--color-fg-bold);
 	}
 
 	@media (max-width: 640px) {
