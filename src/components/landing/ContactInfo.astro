@@ -17,7 +17,7 @@ const {
 	eyebrow,
 	title,
 	addressLabel,
-	addressText = 'Contrada Montincello 20, Vieste (FG)',
+	addressText = 'Contrada Montincello 20A, 71019, Vieste (FG)',
 	mapUrl,
 	mapEmbedTitle,
 	lat = 41.9084365,
@@ -64,7 +64,7 @@ const icons = {
 			<p class="contact-row">
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons.pin} />
 				<span>
-					{addressLabel}:
+					{addressLabel}
 					<a href={mapUrl} target="_blank" rel="noreferrer">{addressText}</a>
 				</span>
 			</p>
